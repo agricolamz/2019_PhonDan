@@ -1,0 +1,28 @@
+name: 'Школа по анализу фонетических данных'
+navbar:
+  left:
+  - icon: fa-home
+    href: index.html
+  - text: математика
+  - text: Praat
+  - text: гласные
+  - text: сонорные
+  - text: шумные
+  - text: просодия
+output_dir: docs
+output:
+  html_document:
+    theme: spacelab
+    highlight: pygments
+    toc: yes
+    toc_position: right
+    toc_depth: 4
+    toc_float: yes
+    smooth_scroll: no
+    code_folding: show
+    df_print: paged
+    include:
+      after_body: footer.html
+      before_body: style.css
+    lib_dir: site_libs
+    self_contained: no
