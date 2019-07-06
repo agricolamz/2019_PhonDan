@@ -35,7 +35,7 @@ read.csv("datasets/2019_lingdan_calendar.csv") %>%
   DT::datatable(options = list(pageLength = 7, dom = 'tip', info = FALSE, paging = FALSE), rownames = FALSE)
 ```
 
-Расписание можно скачать [в формате `.csv`](https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/datasets/2018_lingdan_calendar.csv) и импортировать в Google Calendar, MS Outlook и т. п.
+Расписание можно скачать [в формате `.csv`](https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/datasets/2019_lingdan_calendar.csv) и импортировать в Google Calendar, MS Outlook и т. п.
 
 #### life conditions
 
