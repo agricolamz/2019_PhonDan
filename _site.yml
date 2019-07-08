@@ -4,11 +4,17 @@ navbar:
   - icon: fa-home
     href: index.html
   - text: математика
-  - text: Praat
+    href: 1_math.html
+  - text: софт и статистика
+    href: 2_soft_and_stats.html
   - text: гласные
+    href: 3_vowels.html
   - text: сонорные
+    href: 4_sonorants.html
   - text: шумные
+    href: 5_obstruents.html  
   - text: просодия
+    href: 6_prosody.html
 output_dir: docs
 output:
   html_document:
@@ -19,7 +25,7 @@ output:
     toc_depth: 4
     toc_float: yes
     smooth_scroll: no
-    code_folding: show
+    code_folding: hide
     df_print: paged
     include:
       after_body: footer.html
