@@ -371,7 +371,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3,h4",
+      selectors: "h1,h2,h3",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
@@ -577,16 +577,16 @@ div.tocify {
 <span id="cb4-6"><a href="#cb4-6"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="dv">2</span>)<span class="op">+</span></span>
 <span id="cb4-7"><a href="#cb4-7"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="fl">0.3</span>, <span class="dt">xend =</span> <span class="dv">6</span>, <span class="dt">y =</span> <span class="dv">1</span>, <span class="dt">yend =</span> <span class="dv">1</span>, <span class="dt">color =</span> <span class="st">&quot;darkgreen&quot;</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">ends =</span> <span class="st">&quot;both&quot;</span>))<span class="op">+</span></span>
 <span id="cb4-8"><a href="#cb4-8"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="fl">3.2</span>, <span class="dt">y =</span> <span class="fl">0.85</span>, <span class="dt">label =</span> <span class="st">&quot;T&quot;</span>, <span class="dt">size =</span> <span class="dv">8</span>, <span class="dt">color =</span> <span class="st">&quot;darkgreen&quot;</span>)<span class="op">+</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="dv">4</span><span class="op">*</span>pi, <span class="dt">xend =</span> <span class="dv">4</span><span class="op">*</span>pi, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">yend =</span> <span class="dv">1</span>, <span class="dt">color =</span> <span class="st">&quot;tomato&quot;</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">ends =</span> <span class="st">&quot;both&quot;</span>))<span class="op">+</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="dv">4</span><span class="op">*</span>pi<span class="fl">+0.6</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, <span class="dt">label =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">size =</span> <span class="dv">8</span>, <span class="dt">color =</span> <span class="st">&quot;tomato&quot;</span>)<span class="op">+</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="dv">5</span><span class="op">*</span>pi, <span class="dt">xend =</span> <span class="dv">5</span><span class="op">*</span>pi, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">yend =</span> <span class="dv">-1</span>, <span class="dt">color =</span> <span class="st">&quot;tomato&quot;</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">ends =</span> <span class="st">&quot;both&quot;</span>))<span class="op">+</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="dv">5</span><span class="op">*</span>pi<span class="fl">+0.6</span>, <span class="dt">y =</span> <span class="fl">-0.4</span>, <span class="dt">label =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">size =</span> <span class="dv">8</span>, <span class="dt">color =</span> <span class="st">&quot;tomato&quot;</span>)</span></code></pre></div>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="dv">4</span><span class="op">*</span>pi, <span class="dt">xend =</span> <span class="dv">4</span><span class="op">*</span>pi, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">yend =</span> <span class="dv">1</span>, <span class="dt">color =</span> <span class="st">&quot;firebrick3&quot;</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">ends =</span> <span class="st">&quot;both&quot;</span>)) <span class="op">+</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="dv">4</span><span class="op">*</span>pi<span class="fl">+0.6</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, <span class="dt">label =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">size =</span> <span class="dv">8</span>, <span class="dt">color =</span> <span class="st">&quot;firebrick3&quot;</span>) <span class="op">+</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="dv">5</span><span class="op">*</span>pi, <span class="dt">xend =</span> <span class="dv">5</span><span class="op">*</span>pi, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">yend =</span> <span class="dv">-1</span>, <span class="dt">color =</span> <span class="st">&quot;firebrick3&quot;</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">ends =</span> <span class="st">&quot;both&quot;</span>)) <span class="op">+</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="dv">5</span><span class="op">*</span>pi<span class="fl">+0.6</span>, <span class="dt">y =</span> <span class="fl">-0.4</span>, <span class="dt">label =</span> <span class="st">&quot;A&quot;</span>, <span class="dt">size =</span> <span class="dv">8</span>, <span class="dt">color =</span> <span class="st">&quot;firebrick3&quot;</span>)</span></code></pre></div>
 <p><img src="1_math_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <ul>
 <li>частота (f) — число периодов за секунду</li>
 </ul>
 <p><span class="math display">\[f = \frac{1}{T}; T = \frac{1}{f}\]</span></p>
-<p>*Звуковая волна — обычная гармоническое колебания, а параметры этого колебания связаны с некоторыми параметрами нашего восприятия:</p>
+<p>Звуковая волна — обычная гармоническое колебания, а параметры этого колебания связаны с некоторыми параметрами нашего восприятия:</p>
 <ul>
 <li><p>мы воспринимаем изменения в частотах как изменения в “высоте” звука;</p></li>
 <li><p>мы воспринимаем изменения в амплитуде волны как изменения в “громкости” звука.</p></li>
@@ -594,8 +594,8 @@ div.tocify {
 </ul>
 </div>
 </div>
-<div id="section-3" class="section level1">
-<h1>7. Дополнительные материалы</h1>
+<div id="section-3" class="section level2">
+<h2>7. Дополнительные материалы</h2>
 <ul>
 <li><a href="https://pudding.cool/2018/02/waveforms/">прекрасные материалы</a>, сделанные <a href="https://github.com/joshwcomeau"><strong>Джошуа Комо</strong></a> про волны</li>
 <li><a href="https://www.youtube.com/watch?v=T647CGsuOVU&amp;list=PLiaHhY2iBX9g6KIvZ_703G3KJXapKkNaF&amp;t=0s&amp;index=2">13 видео</a>, сделанные <a href="http://www.welchlabs.com/"><strong>Welch Labs</strong></a>, про комплексные числа</li>

@@ -17,7 +17,10 @@ theme_set(theme_bw()+
             theme(text = element_text(size = 16))) 
 ```
 
+
 ## 1. Гармонические колебания, их представления и их свойства
+
+
 ### 1.1 Гармонические колебания
 **Переодическое колебание** --- тип колебания, при котором значения параметров колебательной системы (амплитуда, период, частота) повторяются через равные промежутки времени. Примером такого колебания могут быть колебания маятников, струн, частиц воздуха и т. п.
 
@@ -63,17 +66,17 @@ tibble(t = seq(0, 7*pi, by = 0.001),
   geom_hline(yintercept = 0, linetype = 2)+
   annotate("segment", x = 0.3, xend = 6, y = 1, yend = 1, color = "darkgreen", size = 2, arrow = arrow(ends = "both"))+
   annotate("text", x = 3.2, y = 0.85, label = "T", size = 8, color = "darkgreen")+
-  annotate("segment", x = 4*pi, xend = 4*pi, y = 0, yend = 1, color = "tomato", size = 2, arrow = arrow(ends = "both"))+
-  annotate("text", x = 4*pi+0.6, y = 0.5, label = "A", size = 8, color = "tomato")+
-  annotate("segment", x = 5*pi, xend = 5*pi, y = 0, yend = -1, color = "tomato", size = 2, arrow = arrow(ends = "both"))+
-  annotate("text", x = 5*pi+0.6, y = -0.4, label = "A", size = 8, color = "tomato")
+  annotate("segment", x = 4*pi, xend = 4*pi, y = 0, yend = 1, color = "firebrick3", size = 2, arrow = arrow(ends = "both")) +
+  annotate("text", x = 4*pi+0.6, y = 0.5, label = "A", size = 8, color = "firebrick3") +
+  annotate("segment", x = 5*pi, xend = 5*pi, y = 0, yend = -1, color = "firebrick3", size = 2, arrow = arrow(ends = "both")) +
+  annotate("text", x = 5*pi+0.6, y = -0.4, label = "A", size = 8, color = "firebrick3")
 ```
 
 * частота (f) --- число периодов за секунду
 
 $$f = \frac{1}{T}; T = \frac{1}{f}$$
 
-*Звуковая волна --- обычная гармоническое колебания, а параметры этого колебания связаны с некоторыми параметрами нашего восприятия:
+Звуковая волна --- обычная гармоническое колебания, а параметры этого колебания связаны с некоторыми параметрами нашего восприятия:
 
 * мы воспринимаем изменения в частотах как изменения в "высоте" звука;
 * мы воспринимаем изменения в амплитуде волны как изменения в "громкости" звука.
@@ -81,7 +84,7 @@ $$f = \frac{1}{T}; T = \frac{1}{f}$$
 * фаза (φ)
 
 
-# 7. Дополнительные материалы
+## 7. Дополнительные материалы
 
 * [прекрасные материалы](https://pudding.cool/2018/02/waveforms/), сделанные [**Джошуа Комо**](https://github.com/joshwcomeau) про волны
 * [13 видео](https://www.youtube.com/watch?v=T647CGsuOVU&list=PLiaHhY2iBX9g6KIvZ_703G3KJXapKkNaF&t=0s&index=2), сделанные [**Welch Labs**](http://www.welchlabs.com/), про комплексные числа
