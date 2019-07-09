@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r, message=FALSE}
 library(tidyverse)
+library(gridExtra)
 # это стиль для ggplot (можно игнорировать эту команду)
 theme_set(theme_bw()+
             theme(text = element_text(size = 16))) 
@@ -31,7 +32,8 @@ tibble(t = seq(0, 7*pi, by = 0.001),
        y = sin(t)) %>% 
   ggplot(aes(t, y))+
   geom_line()+
-  geom_hline(yintercept = 0, linetype = 2)
+  geom_hline(yintercept = 0, linetype = 2)+
+  labs(caption = "sin(x)")
 ```
 
 > 🤔 Почему фрагмент? Потому что идеальное гармоническое колебание не имеет ни начала ни конца. Реальные волны, представленые в мире все **квазипереодические**.
@@ -41,10 +43,11 @@ tibble(t = seq(0, 7*pi, by = 0.001),
 
 ```{r}
 tibble(t = seq(0, 7*pi, by = 0.001),
-       y = sin(t)+ sin(t)*sin(t)) %>% 
+       y = sin(t)+sin(2*t)) %>% 
   ggplot(aes(t, y))+
   geom_line()+
-  geom_hline(yintercept = 0, linetype = 2)
+  geom_hline(yintercept = 0, linetype = 2)+
+  labs(caption = "sin(x)+sin(2*x)")
 ```
 
 Периодические колебания обычно имеют некоторую точку равновесия, около которой они колеблются (на графиках обозначена пунктирной линией).
@@ -69,7 +72,8 @@ tibble(t = seq(0, 7*pi, by = 0.001),
   annotate("segment", x = 4*pi, xend = 4*pi, y = 0, yend = 1, color = "firebrick3", size = 2, arrow = arrow(ends = "both")) +
   annotate("text", x = 4*pi+0.6, y = 0.5, label = "A", size = 8, color = "firebrick3") +
   annotate("segment", x = 5*pi, xend = 5*pi, y = 0, yend = -1, color = "firebrick3", size = 2, arrow = arrow(ends = "both")) +
-  annotate("text", x = 5*pi+0.6, y = -0.4, label = "A", size = 8, color = "firebrick3")
+  annotate("text", x = 5*pi+0.6, y = -0.4, label = "A", size = 8, color = "firebrick3")+
+  labs(caption = "cos(x)")
 ```
 
 * частота (f) --- число периодов за секунду
@@ -81,8 +85,86 @@ $$f = \frac{1}{T}; T = \frac{1}{f}$$
 * мы воспринимаем изменения в частотах как изменения в "высоте" звука;
 * мы воспринимаем изменения в амплитуде волны как изменения в "громкости" звука.
 
-* фаза (φ)
+* фаза (φ) --- цикл гармонического колебания можно разделить на 360°
 
+Вот так это выглядит в декартовой системе координат:
+```{r}
+tibble(t = seq(0, 2*pi, by = 0.001),
+       y = sin(t)) %>% 
+  ggplot(aes(t, y))+
+  geom_line()+
+  geom_hline(yintercept = 0, linetype = 2)+
+  annotate("point", x = 2*pi/4*0:4, y = 0)+
+  annotate("text", x = 2*pi/4*0:4, label = paste0(90*0:4, "°"), y = -0.05, size = 4)+
+  labs(caption = "sin(x)")
+```
+
+Вот так это выглядит в полярной системе координат:
+```{r}
+tibble(t = seq(0, 2*pi, by = 0.001),
+       y = sin(t)) %>% 
+  ggplot(aes(t, y))+
+  geom_line()+
+  geom_hline(yintercept = 0, linetype = 2)+
+  annotate("point", x = 2*pi/4*1:4, y = 0)+
+  annotate("text", x = 2*pi/4*1:4, label = paste0(90*1:4, "°"), y = 0.2, size = 4)+
+  coord_polar(start = -pi/2, direction = -1)+
+  labs(caption = "sin(x)")
+```
+
+Вот пример другой волны:
+
+```{r}
+tibble(t = seq(0, 2*pi, by = 0.001),
+       y = sin(t)+sin(2*t)) %>% 
+  ggplot(aes(t, y))+
+  geom_line()+
+  geom_hline(yintercept = 0, linetype = 2)+
+  annotate("point", x = 2*pi/4*0:4, y = 0)+
+  annotate("text", x = 2*pi/4*0:4, label = paste0(90*0:4, "°"), y = c(-0.2, -0.2, -0.4, 0.2, 0.2), size = 4) ->
+  p1
+
+tibble(t = seq(0, 2*pi, by = 0.001),
+       y = sin(t)+sin(2*t)) %>% 
+  ggplot(aes(t, y))+
+  geom_line()+
+  geom_hline(yintercept = 0, linetype = 2)+
+  annotate("point", x = 2*pi/4*1:4, y = 0)+
+  annotate("text", x = 2*pi/4*1:4, label = paste0(90*1:4, "°"), y = 0.55, size = 4)+
+  coord_polar(start = -pi/2, direction = -1)+
+  labs(caption = "sin(x)+sin(2x)") ->
+  p2
+gridExtra::grid.arrange(p1, p2, nrow = 1)
+```
+
+А теперь можно убедиться, что косинус и синус это одно и то же, и различаются лишь фазой:
+
+```{r}
+tibble(t = seq(0, 2*pi, by = 0.001),
+       sin = sin(t),
+       cos = cos(t)) %>% 
+  gather(type, y, sin:cos) %>% 
+  ggplot(aes(t, y, color = type))+
+  geom_line(show.legend = FALSE)+
+  geom_hline(yintercept = 0, linetype = 2)+
+  annotate("point", x = 2*pi/4*0:4, y = 0)+
+  annotate("text", x = 2*pi/4*0:4, label = paste0(90*0:4, "°"), y = -0.1, size = 4) ->
+  p3 
+
+tibble(t = seq(0, 2*pi, by = 0.001),
+       sin = sin(t),
+       cos = cos(t)) %>% 
+  gather(type, y, sin:cos) %>% 
+  ggplot(aes(t, y, color = type))+
+  geom_line()+
+  geom_hline(yintercept = 0, linetype = 2)+
+  annotate("point", x = 2*pi/4*1:4, y = 0)+
+  annotate("text", x = 2*pi/4*1:4, label = paste0(90*1:4, "°"), y = 0.55, size = 4)+
+  coord_polar(start = -pi/2, direction = -1) +
+  theme(legend.position = "top")->
+  p4
+gridExtra::grid.arrange(p3, p4, nrow = 1)
+```
 
 ## 7. Дополнительные материалы
 
