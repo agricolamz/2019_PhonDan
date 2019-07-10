@@ -664,22 +664,98 @@ div.tocify {
 <span id="cb8-23"><a href="#cb8-23"></a><span class="st">  </span>p4</span>
 <span id="cb8-24"><a href="#cb8-24"></a>gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(p3, p4, <span class="dt">nrow =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="1_math_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Теперь мы можем определить гармонические калебания следующей формулой:</p>
+<p><span class="math display">\[s(t) = A \times \cos(2\pi ft+\phi)\]</span></p>
+<ul>
+<li>A — амплитуда</li>
+<li>f — частота колебания</li>
+<li><span class="math inline">\(\phi\)</span> — фаза</li>
+<li>t — время</li>
+</ul>
 </div>
 <div id="section-3" class="section level3">
 <h3>1.3 Сложение волн</h3>
+<p>Если сложить две одинаковые волны, получится волна с такой же частотой и фазой, а их совместная амплитуды, сложившись друг с другом, удвоится:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">tibble</span>(<span class="dt">t =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">9</span><span class="op">*</span>pi, <span class="dt">by =</span> <span class="fl">0.001</span>),</span>
+<span id="cb9-2"><a href="#cb9-2"></a>      <span class="st">`</span><span class="dt">wave 1</span><span class="st">`</span> =<span class="st"> </span><span class="kw">sin</span>(t),</span>
+<span id="cb9-3"><a href="#cb9-3"></a>      <span class="st">`</span><span class="dt">wave 2</span><span class="st">`</span> =<span class="st"> </span><span class="kw">sin</span>(t),</span>
+<span id="cb9-4"><a href="#cb9-4"></a>      <span class="st">`</span><span class="dt">wave 1 + wave 2</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">wave 1</span><span class="st">`</span>  <span class="op">+</span><span class="st"> `</span><span class="dt">wave 2</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="st">  </span><span class="kw">gather</span>(type, y, <span class="st">`</span><span class="dt">wave 1</span><span class="st">`</span><span class="op">:</span><span class="st">`</span><span class="dt">wave 1 + wave 2</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">type =</span> <span class="kw">factor</span>(type, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;wave 1&quot;</span>, <span class="st">&quot;wave 2&quot;</span>, <span class="st">&quot;wave 1 + wave 2&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(t, y))<span class="op">+</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="dv">2</span>)<span class="op">+</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>type, <span class="dt">nrow =</span> <span class="dv">3</span>)<span class="op">+</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">caption =</span> <span class="st">&quot;wave 1 = wave 2 = sin(x)&quot;</span>)</span></code></pre></div>
+<p><img src="1_math_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Если две одинаковые волны находятся в полной противофазе, то они нейтрализуют амплитуды друг друга:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">tibble</span>(<span class="dt">t =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">9</span><span class="op">*</span>pi, <span class="dt">by =</span> <span class="fl">0.001</span>),</span>
+<span id="cb10-2"><a href="#cb10-2"></a>      <span class="st">`</span><span class="dt">wave 1</span><span class="st">`</span> =<span class="st"> </span><span class="kw">sin</span>(t),</span>
+<span id="cb10-3"><a href="#cb10-3"></a>      <span class="st">`</span><span class="dt">wave 2</span><span class="st">`</span> =<span class="st"> </span><span class="kw">sin</span>(t<span class="op">-</span>pi),</span>
+<span id="cb10-4"><a href="#cb10-4"></a>      <span class="st">`</span><span class="dt">wave 1 + wave 2</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">wave 1</span><span class="st">`</span> <span class="op">+</span><span class="st"> `</span><span class="dt">wave 2</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="st">  </span><span class="kw">gather</span>(type, y, <span class="st">`</span><span class="dt">wave 1</span><span class="st">`</span><span class="op">:</span><span class="st">`</span><span class="dt">wave 1 + wave 2</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">type =</span> <span class="kw">factor</span>(type, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;wave 1&quot;</span>, <span class="st">&quot;wave 2&quot;</span>, <span class="st">&quot;wave 1 + wave 2&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(t, y))<span class="op">+</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="dv">2</span>)<span class="op">+</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>type, <span class="dt">nrow =</span> <span class="dv">3</span>)<span class="op">+</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">caption =</span> <span class="st">&quot;wave 1 = sin(x), wave 2 = sin(t-pi)&quot;</span>)</span></code></pre></div>
+<p><img src="1_math_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>В остальном, сложение волн можно представить, как поточечное сложение каждых элементов волны:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">tibble</span>(<span class="dt">t =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">9</span><span class="op">*</span>pi, <span class="dt">by =</span> <span class="fl">0.001</span>),</span>
+<span id="cb11-2"><a href="#cb11-2"></a>      <span class="st">`</span><span class="dt">wave 1</span><span class="st">`</span> =<span class="st"> </span><span class="kw">sin</span>(t),</span>
+<span id="cb11-3"><a href="#cb11-3"></a>      <span class="st">`</span><span class="dt">wave 2</span><span class="st">`</span> =<span class="st"> </span><span class="kw">sin</span>(<span class="dv">2</span><span class="op">*</span>t),</span>
+<span id="cb11-4"><a href="#cb11-4"></a>      <span class="st">`</span><span class="dt">wave 1 + wave 2</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">wave 1</span><span class="st">`</span> <span class="op">+</span><span class="st"> `</span><span class="dt">wave 2</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="st">  </span><span class="kw">gather</span>(type, y, <span class="st">`</span><span class="dt">wave 1</span><span class="st">`</span><span class="op">:</span><span class="st">`</span><span class="dt">wave 1 + wave 2</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">type =</span> <span class="kw">factor</span>(type, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;wave 1&quot;</span>, <span class="st">&quot;wave 2&quot;</span>, <span class="st">&quot;wave 1 + wave 2&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(t, y))<span class="op">+</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="dv">2</span>)<span class="op">+</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>type, <span class="dt">nrow =</span> <span class="dv">3</span>)<span class="op">+</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">caption =</span> <span class="st">&quot;wave 1 = sin(x), wave 2 = sin(2t)&quot;</span>)</span></code></pre></div>
+<p><img src="1_math_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><strong><em>“Биение”</em></strong> — явление изменения амплитуды суммы двух волн с несильной разницей в частоте.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">tibble</span>(<span class="dt">t =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2</span><span class="op">*</span>pi, <span class="dt">by =</span> <span class="fl">0.001</span>),</span>
+<span id="cb12-2"><a href="#cb12-2"></a>      <span class="st">`</span><span class="dt">198 Hz</span><span class="st">`</span> =<span class="st"> </span><span class="kw">sin</span>(<span class="dv">198</span><span class="op">*</span>t),</span>
+<span id="cb12-3"><a href="#cb12-3"></a>      <span class="st">`</span><span class="dt">200 Hz</span><span class="st">`</span> =<span class="st"> </span><span class="kw">sin</span>(<span class="dv">200</span><span class="op">*</span>t),</span>
+<span id="cb12-4"><a href="#cb12-4"></a>      <span class="st">`</span><span class="dt">198 Hz + 200 Hz</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">198 Hz</span><span class="st">`</span> <span class="op">+</span><span class="st"> `</span><span class="dt">200 Hz</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="st">  </span><span class="kw">gather</span>(type, y, <span class="st">`</span><span class="dt">198 Hz</span><span class="st">`</span><span class="op">:</span><span class="st">`</span><span class="dt">198 Hz + 200 Hz</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">type =</span> <span class="kw">factor</span>(type, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;198 Hz&quot;</span>, <span class="st">&quot;200 Hz&quot;</span>, <span class="st">&quot;198 Hz + 200 Hz&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(t, y))<span class="op">+</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="dv">2</span>)<span class="op">+</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>type, <span class="dt">nrow =</span> <span class="dv">3</span>)</span></code></pre></div>
+<p><img src="1_math_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>198 Hz <audio controls> <source src="data/198.wav" type="audio/wav"></audio></p>
+<p>200 Hz <audio controls> <source src="data/200.wav" type="audio/wav"></audio></p>
+<p>198 Hz + 200 Hz <audio controls> <source src="data/198-200.wav" type="audio/wav"></audio><br></p>
 </div>
 </div>
 <div id="section-4" class="section level2">
-<h2>2. Гармонические колебания и мнимые числа</h2>
-<p>3D-график синусоиды <img src="images/sinusoid_3d.png" /></p>
+<h2>2. Гармонические колебания и комплексные числа</h2>
+<p>Гармонические колебания тесно связаны с комплексными экспоненциальными функциями, благодаря формуле Эйлера:</p>
+<p><span class="math display">\[e^{-ix}=\cos(x)-i\sin(x)\]</span></p>
+<div id="section-5" class="section level3">
+<h3>2.1 Экспонента</h3>
 </div>
-<div id="section-5" class="section level2">
+<div id="section-6" class="section level3">
+<h3>2.2 Комплексные числа</h3>
+</div>
+<div id="section-7" class="section level3">
+<h3>2.3 Формула Эйлера</h3>
+</div>
+<div id="phasors" class="section level3">
+<h3>2.4 Гармонические колебания как phasors</h3>
+<p>3D-график синусоиды <img src="data/sinusoid_3d.png" /></p>
+</div>
+</div>
+<div id="section-8" class="section level2">
 <h2>3. Преобразование Фурье</h2>
 </div>
-<div id="section-6" class="section level2">
+<div id="section-9" class="section level2">
 <h2>4. Разные типы спектрограм</h2>
 </div>
-<div id="section-7" class="section level2">
+<div id="section-10" class="section level2">
 <h2>5. Дополнительные материалы</h2>
 <ul>
 <li><a href="https://pudding.cool/2018/02/waveforms/">прекрасные материалы</a>, сделанные <a href="https://github.com/joshwcomeau"><strong>Джошуа Комо</strong></a> про волны</li>

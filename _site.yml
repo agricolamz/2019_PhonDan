@@ -30,4 +30,4 @@ output:
       after_body: footer.html
       before_body: style.css
     lib_dir: site_libs
-    self_contained: no
+    self_contained: yes
