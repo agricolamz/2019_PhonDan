@@ -740,6 +740,16 @@ div.tocify {
 </div>
 <div id="section-6" class="section level3">
 <h3>2.2 Комплексные числа</h3>
+<p>На рубеже XVIII-XIX веков К. Ф. Гаусс доказад формулу о том, что каждый многочлен, степень которого не меньше единицы, имеет хотя бы один действительный или комлексный корень. Эта формула использует комлексные числа, придуманные впервые в XVI веке (впервые квадрытные корни из отрицательных числе появляются у математика Дж. Кордано).</p>
+<p>Комплексные числа называют упорядоченные пары действительных чисел, второй из которых записывают, используя символ <span class="math inline">\(i\)</span>, например, 5 + 6i, 2 - i, 9 + 0i. (обычно второе слогаемое в таком случае опускают) Все арифметические действия с комлексными числами осуществляется по обычным правилам с учетом равенства <span class="math inline">\(i^2 = -1\)</span>. Комплексное число состоит из двух частей: <strong>действительной</strong> (<span class="math inline">\(\Re(5+6i) = 5\)</span>) и <strong>мнимой</strong> (<span class="math inline">\(\Im(5+6i) = 6\)</span>).</p>
+<p>ПРИМЕРЫ НА АРИФМЕТИКУ</p>
+<p><strong>Модулем</strong> или <strong>абсолютныой величеной</strong> комплексного числа <span class="math inline">\(z = a - ib\)</span> называют число <span class="math inline">\(|z| = \sqrt{a^2+b^2}\)</span>.</p>
+<p>Комплексные числа также можно изобразить на координатной плоскости, отложив по оси абсцисс действительную часть, а по оси ординат мнимую часть.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span><span class="op">+</span>0i, <span class="dv">3</span><span class="op">+</span>2i)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">Re</span>(x), <span class="kw">Im</span>(x)))<span class="op">+</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">arrow =</span> <span class="kw">arrow</span>())<span class="op">+</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="fl">1.5</span>, <span class="dt">y =</span> <span class="fl">1.1</span>, <span class="dt">label =</span> <span class="st">&quot;z&quot;</span>, <span class="dt">size =</span> <span class="dv">8</span>)</span></code></pre></div>
+<p><img src="1_math_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div>
 <div id="section-7" class="section level3">
 <h3>2.3 Формула Эйлера</h3>
