@@ -736,7 +736,7 @@ div.tocify {
 <div id="section-5" class="section level3">
 <h3>2.1 Комплексные числа</h3>
 <p>На рубеже XVIII-XIX веков К. Ф. Гаусс доказад формулу о том, что каждый многочлен, степень которого не меньше единицы, имеет хотя бы один действительный или комлексный корень. Эта формула использует комлексные числа, придуманные впервые в XVI веке (впервые квадрытные корни из отрицательных числе появляются у математика Дж. Кордано).</p>
-<p>Комплексные числа называют упорядоченные пары действительных чисел, второй из которых записывают, используя символ <span class="math inline">\(i\)</span>, например, <span class="math inline">\(5 + 6i\)</span>, <span class="math inline">\(2 - i\)</span>, <span class="math inline">\(9 + 0i\)</span>. (обычно второе слогаемое в таком случае опускают) Все арифметические действия с комлексными числами осуществляется по обычным правилам с учетом равенства <span class="math inline">\(i^2 = -1\)</span>. Комплексное число состоит из двух частей:</p>
+<p>Комплексные числа называют упорядоченные пары действительных чисел, второй из которых записывают, используя символ <span class="math inline">\(i\)</span>, (а <a href="https://stackoverflow.com/questions/24812444/why-are-complex-numbers-in-python-denoted-with-j-instead-of-i">иногда</a> <span class="math inline">\(j\)</span>) например, <span class="math inline">\(5 + 6i\)</span>, <span class="math inline">\(2 - i\)</span>, <span class="math inline">\(9 + 0i\)</span>. (обычно второе слогаемое в таком случае опускают) Все арифметические действия с комлексными числами осуществляется по обычным правилам с учетом равенства <span class="math inline">\(i^2 = -1\)</span>. Комплексное число состоит из двух частей:</p>
 <ul>
 <li><strong>действительной</strong> <span class="math inline">\(Re(5+6i) = 5\)</span></li>
 <li><strong>мнимой</strong> <span class="math inline">\(Im(5+6i) = 6\)</span></li>
@@ -813,13 +813,25 @@ s(t) = Re\left[ A \times e^{i(2\pi ft+\phi)}\right] = A \times Re\left[ e^{i(2\p
 </div>
 </div>
 <div id="section-7" class="section level2">
-<h2>3. Преобразование Фурье</h2>
-<p>Дж. Фурье доказал, что переодическая функция может быть представлена в виде суммы простых переодических функций (например, синусоид).</p>
+<h2>3. Ряд и преобразование Фурье</h2>
+<p>Дж. Фурье яд Фурье</p>
+<p>Спектр пытались анализировать давно: многие исследовали радугу, например, <a href="https://en.wikipedia.org/wiki/Theodoric_of_Freiberg">Теодор из Фрайбарга</a> обнаружил первичную и вторичную радуги в начале XIV века. Жто переоп. Фурье показал, чоказал дфункция может быть представлена в виде суммы простых переодических функций (например, синусоид). Таким образом представление сигнала в виде серии Фурье имеет следующий вид:</p>
+<p><span class="math display">\[
+s(t) =  \sum_{k = -\infty}^{+\infty} c_k\times e^{i(2\pi kft)}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(c_k\)</span> — коэффициенты ряда Фурье, соединяющие в себе амплитуду и фазу</li>
+</ul>
+<p>Однако в таком виде серия Фурье — чисто теоретический конструкт. Не одна реальная физическая волна не может колебаться все время..Р всегда..</p>
+<p>Полезно смотреть на это в <a href="https://www.desmos.com/calculator" class="uri">https://www.desmos.com/calculator</a>.</p>
+<div id="section-8" class="section level3">
+<h3>3.4 Дискретное преобразование Фурье</h3>
 </div>
-<div id="section-8" class="section level2">
-<h2>4. Разные типы спектрограм</h2>
+<div id="section-9" class="section level3">
+<h3>3.3 Разные типы спектрограм</h3>
 </div>
-<div id="section-9" class="section level2">
+</div>
+<div id="section-10" class="section level2">
 <h2>5. Дополнительные материалы</h2>
 <ul>
 <li><a href="https://pudding.cool/2018/02/waveforms/">прекрасные материалы</a>, сделанные <a href="https://github.com/joshwcomeau"><strong>Джошуа Комо</strong></a> про волны</li>

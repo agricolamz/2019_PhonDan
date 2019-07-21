@@ -23,7 +23,7 @@ knitr::opts_chunk$set(echo=FALSE, message=FALSE)
 ```{r}
 library(tidyverse)
 library(lubridate)
-read.csv("datasets/2019_lingdan_calendar.csv") %>%
+read.csv("data/2019_lingdan_calendar.csv") %>%
   mutate(Start.Date = dmy(Start.Date),
          Subject = str_replace_all(Subject, "---", ""),
          Start.Time = str_replace_all(Start.Time, ":00$", ""),
@@ -35,7 +35,7 @@ read.csv("datasets/2019_lingdan_calendar.csv") %>%
   DT::datatable(options = list(pageLength = 7, dom = 'tip', info = FALSE, paging = FALSE), rownames = FALSE)
 ```
 
-Расписание можно скачать [в формате `.csv`](https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/datasets/2019_lingdan_calendar.csv) и импортировать в Google Calendar, MS Outlook и т. п.
+Расписание можно скачать [в формате `.csv`](https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/2019_lingdan_calendar.csv) и импортировать в Google Calendar, MS Outlook и т. п.
 
 #### life conditions
 
