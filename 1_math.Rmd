@@ -575,6 +575,21 @@ df %>%
 t.test(df$value~df$type, paired = TRUE)
 ```
 
+### 2.2 Учебники по статистике для лингвистов
+
+* Butler, C. S. (1995) Statistics in Linguistics
+* Oakes, M. (1998) Statistics for Corpus Linguistics
+* Gigerenzer G. (2004) Mindless statistics
+* Baayen R. H. (2006) Analyzing Linguistic Data
+* Goodman S. (2008) A dirty dozen. twelve p-value misconceptions
+* Jenset G. (2008) Basic statistics for corpus linguistics
+* Johnson K. (2008) Quantitative_Methods_In_Linguistic
+* Gries S. Th. (2009) Quantitative Corpus Linguistics with R_ A Practical Introduction
+* Gries S. T. (2013) Statistics for linguistics with R. A practical introduction
+* Canning J. (2014) Statistics for the Humanities
+* Plonsky, L. (2015). Advancing Quantitative Methods in Second Language Research
+* Levshina N. (2015) How to do Linguistics with R
+
 
 # 3 Домашнее задание
 
@@ -599,6 +614,9 @@ t.test(df$value~df$type, paired = TRUE)
 df <- read.csv("https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/Coretta_2017_icelandic.csv")
 t.test(df$vowel.dur~df$aspiration)
 ```
+
+
+
 
 <form name="FormFour" onsubmit="return validateFormFour()" method="post">
 <input type="text" name="answerFour">
