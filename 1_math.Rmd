@@ -509,7 +509,23 @@ tibble(x = c(0, 3.535534, 5, 3.535534, 0, -3.535534, -5, -3.535534, 0, 3.535534,
 
 ## 2.1 Тест Стьюдента
 
-В качестве примера мы рассмотрим датасет из [Hau 2007].
+В качестве примера мы рассмотрим датасет [из [Hau 2007]](https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/Hau.2007.csv): 
+
+> Experiment consisted of a perception and judgment test aimed at measuring the correlation between acoustic cues and perceived sexual orientation. Naïve Cantonese speakers were asked to listen to the Cantonese speech samples collected in Experiment and judge whether the speakers were gay or heterosexual. There are 14 speakers and following parameters:
+
+* [s] duration (_s.duration.ms_)
+* vowel duration (_vowel.duration.ms_)
+* fundamental frequencies mean (F0) (_average.f0.Hz_)
+* fundamental frequencies range (_f0.range.Hz_)
+* percentage of homosexual impression (_perceived.as.homo_)
+* percentage of heterosexal impression (_perceived.as.hetero_)
+* speakers orientation (_orientation_)
+* speakers age (_age_)
+
+```{r}
+homo <- read_csv("https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/Hau.2007.csv")
+homo
+```
 
 ### 2.1.1 Одновыборочный t-test
 
@@ -527,24 +543,41 @@ $$t = \frac{\bar{x}-\mu_0}{\sigma/\sqrt{n}}$$
 
 $\sigma$ --- среднеквадратическое отклонение
 
+```{r}
+t.test(homo$s.duration.ms, mu = 56)
+```
+
 ### 2.1.2 Двухвыборочный t-test
+
+А что если мы хотим сравнить две независимые выборки?
+
+$$t = \frac{\bar{x}_1-\bar{x}_2}{\sqrt{\frac{\sigma^2_1}{n_1}+ \frac{\sigma^2_2}{n_2}}}$$
+
+```{r}
+t.test(homo$s.duration.ms~homo$orientation)
+```
 
 ### 2.1.3 Парный t-test
 
-Что если значения в группах связаны друг с другом? Например, настроение до нашей пары и после нашей парры
+Что если значения в группах связаны друг с другом? Например, настроение до нашей пары и после нашей пары
 
 ```{r, include=FALSE}
 set.seed(42)
-df <- data.frame(before = rnorm(n = 32, mean = 100),
-                 after = rnorm(n = 32, mean = 97))
+data.frame(before = rnorm(n = 32, mean = 100),
+                 after = rnorm(n = 32, mean = 97)) %>% 
+  gather(type, value) ->
+  df
 ```
 ```{r}
 df
 df %>% 
-  ggplot(aes(before, after))+
+  ggplot(aes(type, value))+
   geom_point()
-t.test(df$before, df$after, paired = TRUE)
+t.test(df$value~df$type, paired = TRUE)
 ```
+
+> 🤔 Это задание основано на работе (Coretta 2017, https://goo.gl/NrfgJm).
+В этой диссертации рассматривается отношения между длительностью гласного и придыхание согласного. Автор собрал данные 5 носителей исланского. Дальше он извлек длительность гласного, после которого были придыхательные и непридыхательные. Проверьте, правда ли, что гласные перед аспирированныем согласными статистикали значимо короче гласных после которых непридыхательные. Данные можно скачать так: `read.csv("https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/Coretta_2017_icelandic.csv")`. В ответе приведите p-value c точностью до трех знаков после запятой:
 
 
 
