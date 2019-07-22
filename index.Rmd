@@ -63,3 +63,6 @@ read.csv("data/2019_lingdan_calendar.csv") %>%
 * **Praat** --- [программа](http://www.fon.hum.uva.nl/praat/) ставиться на все, что угодно. Скачайте для своей операционной системы.
 * **Elan** --- [программа](https://tla.mpi.nl/tools/tla-tools/elan/download/) ставиться на все, что угодно. Скачайте для своей операционной системы.
 * пакеты для скачивания R будут добавлены позже
+* [R](https://www.r-project.org/)
+* [RStudio](https://www.rstudio.com/products/rstudio/download/#download)
+* [Rstudio cloud](https://rstudio.cloud) --- онлайн версия, работает только при хорошем интернете
