@@ -250,7 +250,7 @@ tibble(t = seq(0, 2*pi, by = 0.001),
 
 
 
-## 2. Гармонические колебания и комплексные числа
+## 2. Комплексные числа и формула Эйлера
 
 ### 2.1 Комплексные числа
 
@@ -350,28 +350,145 @@ $$
 
 
 ## 3. Ряд и преобразование Фурье
-Дж. Фурье
-яд Фурье
 
-Спектр пытались анализировать давно: многие исследовали радугу, например, [Теодор из Фрайбарга](https://en.wikipedia.org/wiki/Theodoric_of_Freiberg) обнаружил первичную и вторичную радуги в начале XIV века. Жто переоп. Фурье показал, чоказал дфункция может быть представлена в виде суммы простых переодических функций (например, синусоид). Таким образом представление сигнала в виде серии Фурье имеет следующий вид:
+Спектр пытались анализировать давно: многие исследовали радугу, например, [Теодор из Фрайбарга](https://en.wikipedia.org/wiki/Theodoric_of_Freiberg) обнаружил первичную и вторичную радуги в начале XIV века. Фурье показал, чоказал функция может быть представлена в виде суммы простых переодических функций (например, синусоид). 
+
+Давайте посмотрим [прекрасное видео **Гранта Сандерсона (3blue1brown)**](https://www.youtube.com/watch?v=spUNpyF58BY).
+
+В видео формула преобразования Фурье выглядит вот так:
+
+$$\hat{g}(f) = \int_{-\infty}^{+\infty}g(t)\times e^{-i2\pi ft}dt$$
+
+Если же вам все же не хочется иметь дело с комлексными числами, можно считать два коэффициента:
+
+$$\hat{g}_a(f) = \int_{-\infty}^{+\infty}g(t)\times\cos({2\pi ft})dt$$
+$$\hat{g}_b(f) = \int_{-\infty}^{+\infty}g(t)\times\sin({2\pi ft})dt; $$
+
+Когда мы работаем с естественным сигналом, нам не доступна функция, а только некоторое подмножество наблюдений, которые с какой-то частотой снимает микрофон. В связи с этим возникает дискретное преобразование Фурье (Discrete Fourier Transform, DFT): 
+
+$$\hat{g}_k = \sum_{n = 0}^{N-1}g_n\times e^{-\frac{i2\pi kn}{N}}, \frac{k}{N} \simeq f, n \simeq t$$
+
+Рассмотрим пример синусоиды с амплитудой 1, с частотой сэмплирования 8Hz, т. е. у нас 8 наблюдений:
+
+```{r}
+points <- tibble(t = seq(0, 1.99*pi, by = pi/4), 
+                y = sin(t))
+
+tibble(t = seq(0, 2*pi, by = 0.001),
+       y = sin(t)) %>% 
+  ggplot(aes(t, y))+
+  geom_line()+
+  geom_point(data = points, size = 3)+
+  geom_text(data = points, aes(label = round(y, 3)), size = 3, nudge_x = 0.4, nudge_y = 0.025)+
+  geom_hline(yintercept = 0, linetype = 2)+
+  labs(caption = "sin(x)")
+```
+
+Мы можем посчитать коэфициенты дискретного преобразования Фурье и отметить их на графике:
+```{r}
+x <- c(0, 0.707, 1, 0.707, 0, -0.707, -1, -0.707)
+n <- 0:7
+x_0 <- sum((x*exp(-2i*pi*n*0/length(x))))
+x_0
+x_1 <- sum((x*exp(-2i*pi*n*1/length(x))))
+x_1
+x_2 <- sum((x*exp(-2i*pi*n*2/length(x))))
+x_2
+x_3 <- sum((x*exp(-2i*pi*n*3/length(x))))
+x_3
+x_4 <- sum((x*exp(-2i*pi*n*4/length(x))))
+x_4
+x_5 <- sum((x*exp(-2i*pi*n*5/length(x))))
+x_5
+x_6 <- sum((x*exp(-2i*pi*n*6/length(x))))
+x_6
+x_7 <- sum((x*exp(-2i*pi*n*7/length(x))))
+x_7
+
+tibble(f = n,
+       coefs = c(x_0, x_1, x_2, x_3, x_4, x_5, x_6, x_7),
+       amplitude = abs(coefs)) %>% 
+  ggplot(aes(f, amplitude))+
+  geom_point()+
+  scale_x_continuous(breaks = 0:7, labels = paste(0:7, "Hz"))
+```
+
+Существует Теорема Котельникова (в англоязычной литературе Найквиста --- Шенона), согласно которой чтобы востановить сигнал без потерь частота дискретизации должна быть в два и более раза больше чем самая высокая частота в нашем сигнале. Таким образом мы должны отбросить вторую половину наблюдений, умножив первую на два:
+
+```{r}
+tibble(f = n,
+       coefs = c(x_0, x_1, x_2, x_3, x_4, x_5, x_6, x_7)*2,
+       amplitude = abs(coefs)) %>% 
+  ggplot(aes(f, amplitude))+
+  geom_point()+
+  scale_x_continuous(breaks = 0:7, labels = paste(0:7, "Hz"))+
+  xlim(0, length(x)/2) # это такой изящный способ получить нужное, не изменяя предыдущий код
+```
+
+И последний ход: нам нужно разделить полученные амплитуды на 8 наблюдений, которые у нас были:
+
+```{r}
+tibble(f = n,
+       coefs = c(x_0, x_1, x_2, x_3, x_4, x_5, x_6, x_7)*2/8,
+       amplitude = abs(coefs)) %>% 
+  ggplot(aes(f, amplitude))+
+  geom_point()+
+  scale_x_continuous(breaks = 0:7, labels = paste(0:7, "Hz"))+
+  xlim(0, length(x)/2) # это такой изящный способ получить нужное, не изменяя предыдущий код
+```
+
+Не обязательно помнить сложную формулу, можно использовать функцию `fft()`:
+```{r}
+tibble(x = x,
+       f = 1:length(x)-1,
+       fft = fft(x)) %>% 
+  ggplot(aes(f, abs(fft)))+
+  geom_point()+
+  scale_x_continuous(breaks = 1:length(x)-1, labels = paste(1:length(x)-1, "Hz"))
+```
+
+А теперь применим все преобразования:
+```{r}
+tibble(x = x,
+       f = 1:length(x)-1,
+       fft = fft(x)) %>% 
+  ggplot(aes(f, abs(fft)*2/length(x)))+
+  geom_point()+
+  scale_x_continuous(breaks = 1:length(x)-1, labels = paste(1:length(x)-1, "Hz"))+
+  xlim(0, length(x)/2) # это такой изящный способ получить нужное, не изменяя предыдущий код
+```
+
+> Дан ряд c(0, 3.535534, 5, 3.535534, 0, -3.535534, -5, -3.535534, 0, 3.535534, 5, 3.535534, 0, -3.535534, -5, -3.535534, 0, 3.535534, 5, 3.535534, 0, -3.535534, -5, -3.535534). Посчитайте частоту синусоиды, которая стоит за этим рядом.
+
+<form name="FormTwo" onsubmit="return validateFormTwo()" method="post">
+<input type="text" name="answerTwo">
+<input type="submit" value="check">
+</form><br>
+
+> Дан ряд c(0, 3.535534, 5, 3.535534, 0, -3.535534, -5, -3.535534, 0, 3.535534, 5, 3.535534, 0, -3.535534, -5, -3.535534, 0, 3.535534, 5, 3.535534, 0, -3.535534, -5, -3.535534). Посчитайте амплитуду синусоиды, которая стоит за этим рядом.
+
+<form name="FormThree" onsubmit="return validateFormThree()" method="post">
+<input type="text" name="answerThree">
+<input type="submit" value="check">
+</form><br>
 
 
-$$
-s(t) =  \sum_{k = -\infty}^{+\infty} c_k\times e^{i(2\pi kft)}
-$$
+```{r, include=FALSE}
+tibble(x = c(0, 3.535534, 5, 3.535534, 0, -3.535534, -5, -3.535534, 0, 3.535534, 5, 3.535534, 0, -3.535534, -5, -3.535534, 0, 3.535534, 5, 3.535534, 0, -3.535534, -5, -3.535534),
+       f = 1:length(x)-1,
+       fft = fft(x)) %>% 
+  ggplot(aes(f, abs(fft)*2/length(x)))+
+  geom_point()+
+  scale_x_continuous(breaks = 1:length(x)-1, labels = paste(1:length(x)-1, "Hz"))+
+  xlim(0, length(x)/2) # это такой изящный способ получить нужное, не изменяя предыдущий код
 
-* $c_k$ --- коэффициенты ряда Фурье, соединяющие в себе амплитуду и фазу
-
-Однако в таком виде серия Фурье --- чисто теоретический конструкт. Не одна реальная физическая волна не может колебаться все время..Р всегда..
-
-Полезно смотреть на это в <https://www.desmos.com/calculator>.
-
-### 3.4 Дискретное преобразование Фурье
+# f = 3, amplitude = 5
+```
 
 
 ### 3.3 Разные типы спектрограм
 
-## 5. Дополнительные материалы
+## 4. Дополнительные материалы
 
 * [прекрасные материалы](https://pudding.cool/2018/02/waveforms/), сделанные [**Джошуа Комо**](https://github.com/joshwcomeau) про волны
 * [13 видео](https://www.youtube.com/watch?v=T647CGsuOVU&list=PLiaHhY2iBX9g6KIvZ_703G3KJXapKkNaF&t=0s&index=2), сделанные [**Welch Labs**](http://www.welchlabs.com/), про комплексные числа
@@ -387,6 +504,28 @@ $$
 <script>
 function validateFormOne() {
     var x = document.forms["FormOne"]["answerOne"].value;
+    if (x != "5") {
+        alert("У меня другой ответ...");
+        return false;
+    } else {
+        alert("Да, все правильно");
+        return false;
+    }
+}
+
+function validateFormOne() {
+    var x = document.forms["FormTwo"]["answerTwo"].value;
+    if (x != "3") {
+        alert("У меня другой ответ...");
+        return false;
+    } else {
+        alert("Да, все правильно");
+        return false;
+    }
+}
+
+function validateFormOne() {
+    var x = document.forms["FormThree"]["answerThree"].value;
     if (x != "5") {
         alert("У меня другой ответ...");
         return false;
