@@ -1068,6 +1068,13 @@ s(t) = Re\left[ A \times e^{i(2\pi ft+\phi)}\right] = A \times Re\left[ e^{i(2\p
 </div>
 <div id="section-12" class="section level2">
 <h2>2.2 Линейная регрессия</h2>
+<p>В качестве примера я буду использовать данные из работы [Huttenlocher, Vasilyeva, Cymerman, Levine 2002], в которой авторы проанализировали 46 пар матерей и детей (возрастом от 47 до 59 месяцев, средний возраст … а пасчитайте сами!). Они записали и затранскрибировали 2 часа каждого дня ребенка. Потом они посчитали количество именных групп на предложение у матерей и ребенка. Данные можно скачать командой: <code>np_acquisition &lt;- read.csv("https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/Huttenlocher.csv")</code></p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>np_acquisition &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/Huttenlocher.csv&quot;</span>)</span>
+<span id="cb52-2"><a href="#cb52-2"></a>np_acquisition <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb52-3"><a href="#cb52-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(mother, child))<span class="op">+</span></span>
+<span id="cb52-4"><a href="#cb52-4"></a><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></span>
+<span id="cb52-5"><a href="#cb52-5"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<p><img src="1_math_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <div id="section-13" class="section level3">
 <h3>2.2.1 Линейная регрессия: введение</h3>
 </div>
