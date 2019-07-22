@@ -970,24 +970,11 @@ s(t) = Re\left[ A \times e^{i(2\pi ft+\phi)}\right] = A \times Re\left[ e^{i(2\p
 <li>speakers orientation (<em>orientation</em>)</li>
 <li>speakers age (<em>age</em>)</li>
 </ul>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>homo &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/Hau.2007.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## Parsed with column specification:
-## cols(
-##   speaker = col_character(),
-##   s.duration.ms = col_double(),
-##   vowel.duration.ms = col_double(),
-##   average.f0.Hz = col_double(),
-##   f0.range.Hz = col_double(),
-##   perceived.as.homo = col_double(),
-##   perceived.as.hetero = col_double(),
-##   perceived.as.homo.percent = col_double(),
-##   orientation = col_character(),
-##   age = col_double()
-## )</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>homo</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>homo &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/Hau.2007.csv&quot;</span>)</span>
+<span id="cb41-2"><a href="#cb41-2"></a>homo</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["speaker"],"name":[1],"type":["chr"],"align":["left"]},{"label":["s.duration.ms"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["vowel.duration.ms"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["average.f0.Hz"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["f0.range.Hz"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["perceived.as.homo"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["perceived.as.hetero"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["perceived.as.homo.percent"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["orientation"],"name":[9],"type":["chr"],"align":["left"]},{"label":["age"],"name":[10],"type":["dbl"],"align":["right"]}],"data":[{"1":"A","2":"61.40","3":"112.60","4":"119.51","5":"52.5","6":"7","7":"18","8":"0.28","9":"hetero","10":"30"},{"1":"B","2":"63.90","3":"126.49","4":"100.29","5":"114.0","6":"20","7":"5","8":"0.80","9":"hetero","10":"19"},{"1":"C","2":"55.08","3":"126.81","4":"114.90","5":"103.2","6":"9","7":"16","8":"0.36","9":"homo","10":"29"},{"1":"D","2":"78.11","3":"119.17","4":"126.61","5":"58.8","6":"15","7":"10","8":"0.60","9":"homo","10":"36"},{"1":"E","2":"64.71","3":"93.68","4":"130.76","5":"37.4","6":"10","7":"15","8":"0.40","9":"homo","10":"27"},{"1":"F","2":"67.00","3":"127.87","4":"150.79","5":"42.0","6":"17","7":"8","8":"0.68","9":"homo","10":"33"},{"1":"G","2":"65.39","3":"147.52","4":"128.96","5":"118.2","6":"20","7":"5","8":"0.80","9":"hetero","10":"28"},{"1":"H","2":"62.46","3":"120.13","4":"105.26","5":"55.7","6":"21","7":"4","8":"0.84","9":"hetero","10":"22"},{"1":"I","2":"60.45","3":"140.44","4":"109.86","5":"96.4","6":"20","7":"5","8":"0.80","9":"homo","10":"22"},{"1":"J","2":"59.59","3":"121.01","4":"123.90","5":"111.7","6":"8","7":"17","8":"0.32","9":"homo","10":"40"},{"1":"K","2":"62.94","3":"137.37","4":"119.48","5":"87.6","6":"21","7":"4","8":"0.84","9":"homo","10":"30"},{"1":"L","2":"53.31","3":"112.05","4":"146.20","5":"57.8","6":"8","7":"17","8":"0.32","9":"hetero","10":"25"},{"1":"M","2":"45.13","3":"133.74","4":"155.34","5":"100.5","6":"9","7":"16","8":"0.36","9":"hetero","10":"20"},{"1":"N","2":"57.67","3":"118.02","4":"121.48","5":"37.4","6":"4","7":"21","8":"0.16","9":"hetero","10":"29"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["speaker"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["s.duration.ms"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["vowel.duration.ms"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["average.f0.Hz"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["f0.range.Hz"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["perceived.as.homo"],"name":[6],"type":["int"],"align":["right"]},{"label":["perceived.as.hetero"],"name":[7],"type":["int"],"align":["right"]},{"label":["perceived.as.homo.percent"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["orientation"],"name":[9],"type":["fctr"],"align":["left"]},{"label":["age"],"name":[10],"type":["int"],"align":["right"]}],"data":[{"1":"A","2":"61.40","3":"112.60","4":"119.51","5":"52.5","6":"7","7":"18","8":"0.28","9":"hetero","10":"30"},{"1":"B","2":"63.90","3":"126.49","4":"100.29","5":"114.0","6":"20","7":"5","8":"0.80","9":"hetero","10":"19"},{"1":"C","2":"55.08","3":"126.81","4":"114.90","5":"103.2","6":"9","7":"16","8":"0.36","9":"homo","10":"29"},{"1":"D","2":"78.11","3":"119.17","4":"126.61","5":"58.8","6":"15","7":"10","8":"0.60","9":"homo","10":"36"},{"1":"E","2":"64.71","3":"93.68","4":"130.76","5":"37.4","6":"10","7":"15","8":"0.40","9":"homo","10":"27"},{"1":"F","2":"67.00","3":"127.87","4":"150.79","5":"42.0","6":"17","7":"8","8":"0.68","9":"homo","10":"33"},{"1":"G","2":"65.39","3":"147.52","4":"128.96","5":"118.2","6":"20","7":"5","8":"0.80","9":"hetero","10":"28"},{"1":"H","2":"62.46","3":"120.13","4":"105.26","5":"55.7","6":"21","7":"4","8":"0.84","9":"hetero","10":"22"},{"1":"I","2":"60.45","3":"140.44","4":"109.86","5":"96.4","6":"20","7":"5","8":"0.80","9":"homo","10":"22"},{"1":"J","2":"59.59","3":"121.01","4":"123.90","5":"111.7","6":"8","7":"17","8":"0.32","9":"homo","10":"40"},{"1":"K","2":"62.94","3":"137.37","4":"119.48","5":"87.6","6":"21","7":"4","8":"0.84","9":"homo","10":"30"},{"1":"L","2":"53.31","3":"112.05","4":"146.20","5":"57.8","6":"8","7":"17","8":"0.32","9":"hetero","10":"25"},{"1":"M","2":"45.13","3":"133.74","4":"155.34","5":"100.5","6":"9","7":"16","8":"0.36","9":"hetero","10":"20"},{"1":"N","2":"57.67","3":"118.02","4":"121.48","5":"37.4","6":"4","7":"21","8":"0.16","9":"hetero","10":"29"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <div id="t-test" class="section level3">
@@ -1002,7 +989,7 @@ s(t) = Re\left[ A \times e^{i(2\pi ft+\phi)}\right] = A \times Re\left[ e^{i(2\p
 </ul>
 <p><span class="math display">\[t = \frac{\bar{x}-\mu_0}{\sigma/\sqrt{n}}\]</span></p>
 <p><span class="math inline">\(\sigma\)</span> — среднеквадратическое отклонение</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="kw">t.test</span>(homo<span class="op">$</span>s.duration.ms, <span class="dt">mu =</span> <span class="dv">56</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="kw">t.test</span>(homo<span class="op">$</span>s.duration.ms, <span class="dt">mu =</span> <span class="dv">56</span>)</span></code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
 ## 
@@ -1019,7 +1006,7 @@ s(t) = Re\left[ A \times e^{i(2\pi ft+\phi)}\right] = A \times Re\left[ e^{i(2\p
 <h3>2.1.2 Двухвыборочный t-test</h3>
 <p>А что если мы хотим сравнить две независимые выборки?</p>
 <p><span class="math display">\[t = \frac{\bar{x}_1-\bar{x}_2}{\sqrt{\frac{\sigma^2_1}{n_1}+ \frac{\sigma^2_2}{n_2}}}\]</span></p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="kw">t.test</span>(homo<span class="op">$</span>s.duration.ms<span class="op">~</span>homo<span class="op">$</span>orientation)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="kw">t.test</span>(homo<span class="op">$</span>s.duration.ms<span class="op">~</span>homo<span class="op">$</span>orientation)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -1035,17 +1022,17 @@ s(t) = Re\left[ A \times e^{i(2\pi ft+\phi)}\right] = A \times Re\left[ e^{i(2\p
 <div id="t-test-2" class="section level3">
 <h3>2.1.3 Парный t-test</h3>
 <p>Что если значения в группах связаны друг с другом? Например, настроение до нашей пары и после нашей пары</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>df</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>df</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["type"],"name":[1],"type":["chr"],"align":["left"]},{"label":["value"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"before","2":"101.37096"},{"1":"before","2":"99.43530"},{"1":"before","2":"100.36313"},{"1":"before","2":"100.63286"},{"1":"before","2":"100.40427"},{"1":"before","2":"99.89388"},{"1":"before","2":"101.51152"},{"1":"before","2":"99.90534"},{"1":"before","2":"102.01842"},{"1":"before","2":"99.93729"},{"1":"before","2":"101.30487"},{"1":"before","2":"102.28665"},{"1":"before","2":"98.61114"},{"1":"before","2":"99.72121"},{"1":"before","2":"99.86668"},{"1":"before","2":"100.63595"},{"1":"before","2":"99.71575"},{"1":"before","2":"97.34354"},{"1":"before","2":"97.55953"},{"1":"before","2":"101.32011"},{"1":"before","2":"99.69336"},{"1":"before","2":"98.21869"},{"1":"before","2":"99.82808"},{"1":"before","2":"101.21467"},{"1":"before","2":"101.89519"},{"1":"before","2":"99.56953"},{"1":"before","2":"99.74273"},{"1":"before","2":"98.23684"},{"1":"before","2":"100.46010"},{"1":"before","2":"99.36001"},{"1":"before","2":"100.45545"},{"1":"before","2":"100.70484"},{"1":"after","2":"98.03510"},{"1":"after","2":"96.39107"},{"1":"after","2":"97.50496"},{"1":"after","2":"95.28299"},{"1":"after","2":"96.21554"},{"1":"after","2":"96.14909"},{"1":"after","2":"94.58579"},{"1":"after","2":"97.03612"},{"1":"after","2":"97.20600"},{"1":"after","2":"96.63894"},{"1":"after","2":"97.75816"},{"1":"after","2":"96.27330"},{"1":"after","2":"95.63172"},{"1":"after","2":"97.43282"},{"1":"after","2":"96.18861"},{"1":"after","2":"98.44410"},{"1":"after","2":"96.56855"},{"1":"after","2":"97.65565"},{"1":"after","2":"97.32193"},{"1":"after","2":"96.21616"},{"1":"after","2":"98.57573"},{"1":"after","2":"97.64290"},{"1":"after","2":"97.08976"},{"1":"after","2":"97.27655"},{"1":"after","2":"97.67929"},{"1":"after","2":"97.08983"},{"1":"after","2":"94.00691"},{"1":"after","2":"97.28488"},{"1":"after","2":"96.63277"},{"1":"after","2":"97.18523"},{"1":"after","2":"97.58182"},{"1":"after","2":"98.39974"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>df <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb49-2"><a href="#cb49-2"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(type, value))<span class="op">+</span></span>
-<span id="cb49-3"><a href="#cb49-3"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>df <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb47-2"><a href="#cb47-2"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(type, value))<span class="op">+</span></span>
+<span id="cb47-3"><a href="#cb47-3"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
 <p><img src="1_math_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">t.test</span>(df<span class="op">$</span>value<span class="op">~</span>df<span class="op">$</span>type, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="kw">t.test</span>(df<span class="op">$</span>value<span class="op">~</span>df<span class="op">$</span>type, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Paired t-test
 ## 
@@ -1057,42 +1044,10 @@ s(t) = Re\left[ A \times e^{i(2\pi ft+\phi)}\right] = A \times Re\left[ e^{i(2\p
 ## sample estimates:
 ## mean of the differences 
 ##               -3.194871</code></pre>
-<blockquote>
-<p>🤔 Это задание основано на работе (Coretta 2017, <a href="https://goo.gl/NrfgJm" class="uri">https://goo.gl/NrfgJm</a>). В этой диссертации рассматривается отношения между длительностью гласного и придыхание согласного. Автор собрал данные 5 носителей исланского. Дальше он извлек длительность гласного, после которого были придыхательные и непридыхательные. Проверьте, правда ли, что гласные перед аспирированныем согласными статистикали значимо короче гласных после которых непридыхательные. Данные можно скачать так: <code>read.csv("https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/Coretta_2017_icelandic.csv")</code>. В ответе приведите t-статистику c точностью до трех знаков после запятой:</p>
-</blockquote>
-<form name="FormFour" onsubmit="return validateFormFour()" method="post">
-<input type="text" name="answerFour"> <input type="submit" value="check">
-</form>
-<p><br></p>
 </div>
 </div>
-<div id="section-12" class="section level2">
-<h2>2.2 Линейная регрессия</h2>
-<p>В качестве примера я буду использовать данные из работы [Huttenlocher, Vasilyeva, Cymerman, Levine 2002], в которой авторы проанализировали 46 пар матерей и детей (возрастом от 47 до 59 месяцев, средний возраст … а пасчитайте сами!). Они записали и затранскрибировали 2 часа каждого дня ребенка. Потом они посчитали количество именных групп на предложение у матерей и ребенка. Данные можно скачать командой: <code>np_acquisition &lt;- read.csv("https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/Huttenlocher.csv")</code></p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>np_acquisition &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/Huttenlocher.csv&quot;</span>)</span>
-<span id="cb52-2"><a href="#cb52-2"></a>np_acquisition <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb52-3"><a href="#cb52-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(mother, child))<span class="op">+</span></span>
-<span id="cb52-4"><a href="#cb52-4"></a><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></span>
-<span id="cb52-5"><a href="#cb52-5"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<p><img src="1_math_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
-<div id="section-13" class="section level3">
-<h3>2.2.1 Линейная регрессия: введение</h3>
 </div>
-<div id="section-14" class="section level3">
-<h3>2.2.2 Линейная регрессия: множественная регрессия</h3>
-</div>
-<div id="section-15" class="section level3">
-<h3>2.2.3 Линейная регрессия: категориальные переменные</h3>
-</div>
-</div>
-<div id="section-16" class="section level2">
-<h2>2.3 Логистическая регрессия</h2>
-</div>
-<div id="section-17" class="section level2">
-<h2>2.4 Модели со смешанными эффектами</h2>
-</div>
-</div>
-<div id="section-18" class="section level1">
+<div id="section-12" class="section level1">
 <h1>3 Домашнее задание</h1>
 <ul>
 <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScLWNxqwls7ZDxB7S4OyhOWM3U86g-PSwxYfNpSWHqme5KiQQ/viewform?c=0&amp;w=1">Самопроверяющаяся практика по базовому R</a></li>
@@ -1110,11 +1065,14 @@ s(t) = Re\left[ A \times e^{i(2\pi ft+\phi)}\right] = A \times Re\left[ e^{i(2\p
 </form>
 <p><br></p>
 <ul>
-<li>t-test</li>
+<li>t-test: Это задание основано на работе (Coretta 2017, <a href="https://goo.gl/NrfgJm" class="uri">https://goo.gl/NrfgJm</a>). В этой диссертации рассматривается отношения между длительностью гласного и придыхание согласного. Автор собрал данные 5 носителей исланского. Дальше он извлек длительность гласного, после которого были придыхательные и непридыхательные. Проверьте, правда ли, что гласные перед аспирированныем согласными статистикали значимо короче гласных после которых непридыхательные. Данные можно скачать так: <code>read.csv("https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/Coretta_2017_icelandic.csv")</code>. В ответе приведите t-статистику c точностью до трех знаков после запятой:</li>
 </ul>
+<form name="FormFour" onsubmit="return validateFormFour()" method="post">
+<input type="text" name="answerFour"> <input type="submit" value="check">
+</form>
+<p><br></p>
 <script>
-* регрессииf
-unction validateFormOne() {
+function validateFormOne() {
     var x = document.forms["FormOne"]["answerOne"].value;
     if (x != "5") {
         alert("У меня другой ответ...");
