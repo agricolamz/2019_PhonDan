@@ -636,7 +636,8 @@ np_acquisition %>%
 * t-test
 
 <script>
-function validateFormOne() {
+* регрессииf
+unction validateFormOne() {
     var x = document.forms["FormOne"]["answerOne"].value;
     if (x != "5") {
         alert("У меня другой ответ...");
@@ -702,3 +703,4 @@ function validateFormSix() {
     }
 }
 </script>
+  
