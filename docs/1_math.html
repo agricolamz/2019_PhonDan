@@ -1058,26 +1058,31 @@ s(t) = Re\left[ A \times e^{i(2\pi ft+\phi)}\right] = A \times Re\left[ e^{i(2\p
 ## mean of the differences 
 ##               -3.194871</code></pre>
 <blockquote>
-<p>🤔 Это задание основано на работе (Coretta 2017, <a href="https://goo.gl/NrfgJm" class="uri">https://goo.gl/NrfgJm</a>). В этой диссертации рассматривается отношения между длительностью гласного и придыхание согласного. Автор собрал данные 5 носителей исланского. Дальше он извлек длительность гласного, после которого были придыхательные и непридыхательные. Проверьте, правда ли, что гласные перед аспирированныем согласными статистикали значимо короче гласных после которых непридыхательные. Данные можно скачать так: <code>read.csv("https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/Coretta_2017_icelandic.csv")</code>. В ответе приведите p-value c точностью до трех знаков после запятой:</p>
+<p>🤔 Это задание основано на работе (Coretta 2017, <a href="https://goo.gl/NrfgJm" class="uri">https://goo.gl/NrfgJm</a>). В этой диссертации рассматривается отношения между длительностью гласного и придыхание согласного. Автор собрал данные 5 носителей исланского. Дальше он извлек длительность гласного, после которого были придыхательные и непридыхательные. Проверьте, правда ли, что гласные перед аспирированныем согласными статистикали значимо короче гласных после которых непридыхательные. Данные можно скачать так: <code>read.csv("https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/Coretta_2017_icelandic.csv")</code>. В ответе приведите p-value c t-статистикуью до трех знаков после запятой:</p>
 </blockquote>
 </div>
 </div>
-<div id="section-12" class="section level2">
-<h2>2.2 Линейная регрессия</h2>
-<div id="section-13" class="section level3">
+<div id="r-includefalse-df---read.csvhttpsraw.githubusercontent.comagricolamz2019_phondanmasterdatacoretta_2017_icelandic.csv-t.testdfvowel.durdfaspiration" class="section level2">
+<h2>2.2 Л<code>{r, include=FALSE} df &lt;- read.csv("https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/Coretta_2017_icelandic.csv") t.test(df$vowel.dur~df$aspiration)</code></h2>
+<form name="FormFour" onsubmit="return validateFormFour()" method="post">
+<input type="text" name="answerFour"> <input type="submit" value="check">
+</form>
+<p><br></p>
+<p>инейная регрессия</p>
+<div id="section-12" class="section level3">
 <h3>2.2.1 Линейная регрессия: введение</h3>
 </div>
-<div id="section-14" class="section level3">
+<div id="section-13" class="section level3">
 <h3>2.2.2 Линейная регрессия: множественная регрессия</h3>
 </div>
-<div id="section-15" class="section level3">
+<div id="section-14" class="section level3">
 <h3>2.2.3 Линейная регрессия: категориальные переменные</h3>
 </div>
 </div>
-<div id="section-16" class="section level2">
+<div id="section-15" class="section level2">
 <h2>2.3 Логистическая регрессия</h2>
 </div>
-<div id="section-17" class="section level2">
+<div id="section-16" class="section level2">
 <h2>2.4 Модели со смешанными эффектами</h2>
 <script>
 function validateFormOne() {
@@ -1092,7 +1097,7 @@ function validateFormOne() {
 }
 
 function validateFormOne() {
-    var x = document.forms["FormTwo"]["answerTwo"].value;
+  Twoar x = document.forms["FormTwo"]["answerTwo"].value;
     if (x != "3") {
         alert("У меня другой ответ...");
         return false;
@@ -1103,7 +1108,7 @@ function validateFormOne() {
 }
 
 function validateFormOne() {
-    var x = document.forms["FormThree"]["answerThree"].value;
+  Threvar x = document.forms["FormThree"]["answerThree"].value;
     if (x != "5") {
         alert("У меня другой ответ...");
         return false;
@@ -1113,6 +1118,7 @@ function validateFormOne() {
     }
 }
 </script>
+<p>function validateFormFour() { var x = document.forms[“FormFour”][“answerFour”].value; if (x != “9.554”) { alert(“У меня другой ответ…”); return false; } else { alert(“Да, все правильно”); return false; } }</p>
 </div>
 </div>
 
