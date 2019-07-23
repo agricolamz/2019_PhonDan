@@ -1290,6 +1290,32 @@ div.tocify {
 <li>f1, f2, f3 - the 1st, 2nd and 3rd formant of the vowel measured in Hz (for a short introduction into formants, see here)&lt;&gt;</li>
 <li>vowel - vowel classified according the 3-fold classification (A - a under stress, a - a/o as in the first syllable before the stressed one, y (stands for shva) - a/o as in the second etc. syllable before the stressed one or after the stressed syllable, cf. g[y]g[a]t[A]l[y] gogotala ‘guffawed’). In this part, we will ask you to analyse correlation between f1, f2, and duration.</li>
 </ul>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1"></a>shva &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(<span class="st">&quot;https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/duryagin_ReductionRussian.txt&quot;</span>)</span></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   time1 = col_double(),
+##   duration = col_double(),
+##   time2 = col_double(),
+##   f2 = col_double(),
+##   f1 = col_double(),
+##   f3 = col_double(),
+##   vowel = col_character()
+## )</code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1"></a>shva <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb104-2"><a href="#cb104-2"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>f2, <span class="dt">y=</span>f1, <span class="dt">color=</span>vowel)) <span class="op">+</span></span>
+<span id="cb104-3"><a href="#cb104-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb104-4"><a href="#cb104-4"></a><span class="st">  </span><span class="kw">scale_x_reverse</span>()<span class="op">+</span></span>
+<span id="cb104-5"><a href="#cb104-5"></a><span class="st">  </span><span class="kw">scale_y_reverse</span>()<span class="op">+</span></span>
+<span id="cb104-6"><a href="#cb104-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;f2&quot;</span>,</span>
+<span id="cb104-7"><a href="#cb104-7"></a>       <span class="dt">y =</span> <span class="st">&quot;f1&quot;</span>,</span>
+<span id="cb104-8"><a href="#cb104-8"></a>       <span class="dt">title =</span> <span class="st">&quot;f2 and f1 of the reduced and stressed vowels&quot;</span>,</span>
+<span id="cb104-9"><a href="#cb104-9"></a>       <span class="dt">caption =</span> <span class="st">&quot;Data from Duryagin 2018&quot;</span>)</span></code></pre></div>
+<p><img src="2_stats_spectrum_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p>Постройте регрессию со смешанными эффектами, предсказывая f2 на основе f1 и гласный – в случайных эффектах. В ответе приведите коэффициент при f1 (с точностью до 4 знаков после запятой:</p>
+<form name="FormFour" onNineit="return validateFormFour()" Nineod="post">
+<input type="text" name="answerFour"> <Ninet type="submit" value="check">
+</form>
+<p><br></p>
 <script>
 function validateFormOne() {
     var x = document.forms["FormOne"]["answerOne"].value;
@@ -1378,6 +1404,17 @@ function validateFormEight() {
         return false;
     }
 }
+function validateFormNine() {
+    var x = document.forms["FormNine"]["answerNine"].value;
+    if (x != "0.0689") {
+        alert("У меня другой ответ...");
+        return false;
+    } else {
+        alert("Да, все правильно");
+        return false;
+    }
+}
+
 </script>
 </div>
 </div>

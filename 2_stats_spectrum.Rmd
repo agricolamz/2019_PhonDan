@@ -501,11 +501,8 @@ Pavel Duryagin ran an experiment on perception of vowel reduction in Russian lan
 * f1, f2, f3 - the 1st, 2nd and 3rd formant of the vowel measured in Hz (for a short introduction into formants, see here)<\br>
 * vowel - vowel classified according the 3-fold classification (A - a under stress, a - a/o as in the first syllable before the stressed one, y (stands for shva) - a/o as in the second etc. syllable before the stressed one or after the stressed syllable, cf. g[y]g[a]t[A]l[y] gogotala ‘guffawed’). In this part, we will ask you to analyse correlation between f1, f2, and duration.
 
-
-
-
-<scri```{r}
-shva <- read.csv("https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/duryagin_ReductionRussian.txt")
+```{r}
+shva <- read_tsv("https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/duryagin_ReductionRussian.txt")
 shva %>% 
   ggplot(aes(x=f2, y=f1, color=vowel)) +
   geom_point(show.legend = FALSE) +
@@ -515,7 +512,21 @@ shva %>%
        y = "f1",
        title = "f2 and f1 of the reduced and stressed vowels",
        caption = "Data from Duryagin 2018")
-```pt>
+```
+
+Постройте регрессию со смешанными эффектами, предсказывая  f2 на основе f1 и гласный -- в случайных эффектах. В ответе приведите коэффициент при f1 (с точностью до 4 знаков после запятой:
+
+```{r, include=FALSE}
+fit2 <- lmer(f2~f1+(1|vowel), data = shva)
+```
+
+<form name="FormFour" onNineit="return validateFormFour()" Nineod="post">
+<input type="text" name="answerFour">
+<Ninet type="submit" value="check">
+</form><br>
+
+
+<script>
 function validateFormOne() {
     var x = document.forms["FormOne"]["answerOne"].value;
     if (x != "77.9269") {
@@ -603,4 +614,15 @@ function validateFormEight() {
         return false;
     }
 }
+function validateFormNine() {
+    var x = document.forms["FormNine"]["answerNine"].value;
+    if (x != "0.0689") {
+        alert("У меня другой ответ...");
+        return false;
+    } else {
+        alert("Да, все правильно");
+        return false;
+    }
+}
+
 </script>
