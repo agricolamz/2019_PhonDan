@@ -656,7 +656,7 @@ div.tocify {
 <p>В таком случае наша формула примет следующий вид:</p>
 <p><span class="math display">\[y_j = \beta_0 + \beta_1\times x + e_j\]</span></p>
 <p><span class="math display">\[s\_duration_j = \beta_0 + \beta_1\times orientation_j + e_j\]</span></p>
-<p>При описании гомосексуалов переменная <span class="math inline">\(orientation = 1\)</span>, тогда модель принимает вид: <span class="math display">\[s\_duration_j = \beta_0 + \beta_1\times orientation_j + e_j = \beta_0 + \beta_1\times 0 + e_j = \beta_0 + e_j\]</span></p>
+<p>При описании гомоетерксуалов переменная <span class="math inline">\(orientation = 1\)</span>,0тогда модель принимает вид: <span class="math display">\[s\_duration_j = \beta_0 + \beta_1\times orientation_j + e_j = \beta_0 + \beta_1\times 0 + e_j = \beta_0 + e_j\]</span></p>
 <p>При описании гомосексуалов переменная <span class="math inline">\(orientation = 1\)</span>, тогда модель принимает вид: <span class="math display">\[s\_duration_j = \beta_0 + \beta_1\times orientation_j + e_j = \beta_0 + \beta_1\times 1 + e_j = \beta_0 + \beta_1 + e_j\]</span></p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(s.duration.ms<span class="op">~</span>orientation, <span class="dt">data =</span> homo)</span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
@@ -703,7 +703,7 @@ div.tocify {
 ## Multiple R-squared:  0.145,  Adjusted R-squared:  0.0737 
 ## F-statistic: 2.034 on 1 and 12 DF,  p-value: 0.1793</code></pre>
 <blockquote>
-<p>🤔 Скачайие датасет, который содержит <a href="https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/phoible_ejectives.csv">данные по количеству согласных в языках мира</a>. Постройте регрессию предсказывающую количество согласных на основании наличия абруптивных. Приведите интерсепт модели (с точностью до 4 знаков после запятой):</p>
+<p>🤔 Скачайте датасет, который содержит <a href="https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/phoible_ejectives.csv">данные по количеству согласных в языках мира</a>. Постройте регрессию предсказывающую количество согласных на основании наличия абруптивных. Приведите интерсепт модели (с точностью до 4 знаков после запятой):</p>
 </blockquote>
 <form name="FormFour" onsubmit="return validateFormFour()" method="post">
 <input type="text" name="answerFour"> <input type="submit" value="check">
@@ -725,7 +725,8 @@ div.tocify {
 <blockquote>
 <p>🤔 В датасете про гомосексуалов попробуйте предсказать восприятие носителей как гомосексуалов на основании переменных длительность s, средняя частота основного тона и размер диапозона частоты основного тона. Првиедите <span class="math inline">\(R^2\)</span> получившейся модели:</p>
 </blockquote>
-summary(lm(perceived.as.homo.percent~s.duration.ms+average.f0.Hz+f0.range.Hz, data = homo))&lt;# 0.238 form name=“FormSix” onsubmit=“return validateFormSix()” method=“post”&gt; <input type="text" name="answerSix"> <input type="submit" value="check">
+<form name="FormSix" onsubmit="return validateFormSix()" method="post">
+<input type="text" name="answerSix"> <input type="submit" value="check">
 </form>
 <p><br></p>
 </div>
@@ -1066,8 +1067,8 @@ function validateFormFive() {
 
 function validateFormSix() {
     var x = document.forms["FormSix"]["answerSix"].value;
-    if (x != "") {
-   0.238     alert("У меня другой ответ...");
+    if (x != "0.238") {
+        alert("У меня другой ответ...");
         return false;
     } else {
         alert("Да, все правильно");
