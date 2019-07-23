@@ -1,0 +1,15 @@
+---
+title: "spectrum"
+output: html_document
+---
+
+# 1. Спектр
+
+<audio controls> <source src="data/Yanny_Laurel_original_speed_75.mp3" type="audio/wav"></audio><br>
+[Можно скачать звук](https://github.com/agricolamz/2019_PhonDan/raw/master/data/Yanny_Laurel_original_speed_75.mp3)
+
+На N+1 есть какие-то [мои материалы](https://nplus1.ru/blog/2018/05/16/acousticdress) про это, и [статья получше из New York Times](https://www.nytimes.com/interactive/2018/05/16/upshot/audio-clip-yanny-laurel-debate.html?fbclid=IwAR0OSchlyNl4_QnKNqhV5tZZRH1TUqE3P2WrHHSAmTzONTWGUXIHMfYzeK4).
+
+Есть еще [такая история](https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.reddit.com%2Fr%2Ffunny%2Fcomments%2Fa9zlu8%2Fmay_have_just_found_next_yanni_or_laurel%2F&h=AT2KHsJyiRTEbqTxneDJDGNRMBb-g2GlQYEAalu-2xACTWzZr5u_Zg1L3tzMTX0dQNKFKDjNliFhBak6cLwdTV8XHhXw9GKqwEQHWeVClq2MA5pHz6Qeyb6BIjfQag), но она, видимо, не имеет непосредственного отношения к спектру.
+
+[Можно скачать звук](https://github.com/agricolamz/2019_PhonDan/raw/master/data/excellent_idea.wav)
