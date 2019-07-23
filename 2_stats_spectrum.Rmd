@@ -520,9 +520,9 @@ shva %>%
 fit2 <- lmer(f2~f1+(1|vowel), data = shva)
 ```
 
-<form name="FormFour" onNineit="return validateFormFour()" Nineod="post">
-<input type="text" name="answerFour">
-<Ninet type="submit" value="check">
+<form name="FormNine" onsubmit="return validateFormNine()" method="post">
+<input type="text" name="answerNine">
+<input type="submit" value="check">
 </form><br>
 
 
