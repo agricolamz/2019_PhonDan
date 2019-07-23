@@ -175,6 +175,11 @@ fit <- lm(s.duration.ms~orientation, data = homo)
 summary(fit)
 ```
 
+```{r, include=FALSE}
+homo$orientation <- factor(homo$orientation, levels = c("hetero", "homo"))
+```
+
+
 > 🤔 Скачайте датасет, который содержит [данные по количеству согласных в языках мира](https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/phoible_ejectives.csv). Постройте регрессию предсказывающую количество согласных на основании наличия абруптивных. Приведите интерсепт модели (с точностью до 4 знаков после запятой):
 
 ```{r, include=FALSE}
@@ -231,13 +236,13 @@ $$\log(odds), \mbox{область значений: }[-\infty, +\infty]$$
 Но, что нам говорит логарифм шансов? Как нам его интерпретировать?
 
 ```{r}
-data_frame(n = 10,
-           success = 1:9,
-           failure = n - success,
-           prob.1 = success/(success+failure),
-           odds = success/failure,
-           log_odds = log(odds),
-           prob.2 = exp(log_odds)/(1+exp(log_odds)))
+tibble(n = 10,
+       success = 1:9,
+       failure = n - success,
+       prob.1 = success/(success+failure),
+       odds = success/failure,
+       log_odds = log(odds),
+       prob.2 = exp(log_odds)/(1+exp(log_odds)))
 ```
 
 Как связаны вероятность и логарифм шансов:
@@ -360,7 +365,7 @@ pscl::pR2(logit_1)
 ```{r, include=FALSE}
 homo_fit <- glm(orientation~s.duration.ms+average.f0.Hz+ f0.range.Hz, family = "binomial", data = homo)
 summary(homo_fit)
-# -0.025
+# 0.025
 ```
 
 <form name="FormSeven" onsubmit="return validateFormSeven()" method="post">
@@ -595,7 +600,7 @@ function validateFormSix() {
 
 function validateFormSeven() {
     var x = document.forms["FormSeven"]["answerSeven"].value;
-    if (x != "-0.025") {
+    if (x != "0.025") {
         alert("У меня другой ответ...");
         return false;
     } else {
@@ -606,7 +611,7 @@ function validateFormSeven() {
 
 function validateFormEight() {
     var x = document.forms["FormEight"]["answerEight"].value;
-    if (x != "0.536") {
+    if (x != "0.463") {
         alert("У меня другой ответ...");
         return false;
     } else {
