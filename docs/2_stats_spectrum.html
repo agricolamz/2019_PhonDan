@@ -723,14 +723,266 @@ div.tocify {
 <p><span class="math display">\[y_j = \beta_0 + \beta_1 \times x_{1j} + \dots + \beta_k \times x_{kj} + e_j\]</span></p>
 <p>Кроме того на практике, исследователи сравнивают разные модели, выбирая модели с статистически значимыми предикторами или используя информационные критерии (самый распространенный — критерий Акаике, который реализован в функции <code>AIC</code>)</p>
 <blockquote>
-<p>🤔 🤔 В датасете про гомосексуалов попробуйте предсказать восприятие носителей как гомосексуалов на основании переменных длительность s, средняя частота основного тона и размер диапозона частоты основного тона Логистическая регрессия</p>
+<p>🤔 В датасете про гомосексуалов попробуйте предсказать восприятие носителей как гомосексуалов на основании переменных длительность s, средняя частота основного тона и размер диапозона частоты основного тона</p>
 </blockquote>
 </div>
 <div id="section-4" class="section level2">
+<h2>1.4 Логистическая регрессия</h2>
+<div id="section-5" class="section level3">
+<h3>1.4.1 Введение</h3>
+<p>Мы хотим чего-то такого: <span class="math display">\[\underbrace{y}_{[-\infty, +\infty]}=\underbrace{\mbox{β}_0+\mbox{β}_1\cdot x_1+\mbox{β}_2\cdot x_2 + \dots +\mbox{β}_k\cdot x_k +\mbox{ε}_i}_{[-\infty, +\infty]}\]</span> Вероятность — (в классической статистике) отношение количества успехов к общему числу событий: <span class="math display">\[p = \frac{\mbox{# успехов}}{\mbox{# неудач} + \mbox{# успехов}}, \mbox{область значений: }[0, 1]\]</span> Шансы — отношение количества успехов к количеству неудач: <span class="math display">\[odds = \frac{p}{1-p} = \frac{p\mbox{(успеха)}}{p\mbox{(неудачи)}}, \mbox{область значений: }[0, +\infty]\]</span> Натуральный логарифм шансов: <span class="math display">\[\log(odds), \mbox{область значений: }[-\infty, +\infty]\]</span></p>
+<p>Но, что нам говорит логарифм шансов? Как нам его интерпретировать?</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">data_frame</span>(<span class="dt">n =</span> <span class="dv">10</span>,</span>
+<span id="cb18-2"><a href="#cb18-2"></a>           <span class="dt">success =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>,</span>
+<span id="cb18-3"><a href="#cb18-3"></a>           <span class="dt">failure =</span> n <span class="op">-</span><span class="st"> </span>success,</span>
+<span id="cb18-4"><a href="#cb18-4"></a>           <span class="dt">prob.1 =</span> success<span class="op">/</span>(success<span class="op">+</span>failure),</span>
+<span id="cb18-5"><a href="#cb18-5"></a>           <span class="dt">odds =</span> success<span class="op">/</span>failure,</span>
+<span id="cb18-6"><a href="#cb18-6"></a>           <span class="dt">log_odds =</span> <span class="kw">log</span>(odds),</span>
+<span id="cb18-7"><a href="#cb18-7"></a>           <span class="dt">prob.2 =</span> <span class="kw">exp</span>(log_odds)<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(log_odds)))</span></code></pre></div>
+<pre><code>## Warning: `data_frame()` is deprecated, use `tibble()`.
+## This warning is displayed once per session.</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["n"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["success"],"name":[2],"type":["int"],"align":["right"]},{"label":["failure"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["prob.1"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["odds"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["log_odds"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["prob.2"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"10","2":"1","3":"9","4":"0.1","5":"0.1111111","6":"-2.1972246","7":"0.1"},{"1":"10","2":"2","3":"8","4":"0.2","5":"0.2500000","6":"-1.3862944","7":"0.2"},{"1":"10","2":"3","3":"7","4":"0.3","5":"0.4285714","6":"-0.8472979","7":"0.3"},{"1":"10","2":"4","3":"6","4":"0.4","5":"0.6666667","6":"-0.4054651","7":"0.4"},{"1":"10","2":"5","3":"5","4":"0.5","5":"1.0000000","6":"0.0000000","7":"0.5"},{"1":"10","2":"6","3":"4","4":"0.6","5":"1.5000000","6":"0.4054651","7":"0.6"},{"1":"10","2":"7","3":"3","4":"0.7","5":"2.3333333","6":"0.8472979","7":"0.7"},{"1":"10","2":"8","3":"2","4":"0.8","5":"4.0000000","6":"1.3862944","7":"0.8"},{"1":"10","2":"9","3":"1","4":"0.9","5":"9.0000000","6":"2.1972246","7":"0.9"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Как связаны вероятность и логарифм шансов: <span class="math display">\[\log(odds) = \log\left(\frac{p}{1-p}\right)\]</span> <span class="math display">\[p = \frac{\exp(\log(odds))}{1+\exp(\log(odds))}\]</span></p>
+<p>Как связаны вероятность и логарифм шансов:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">data_frame</span>(<span class="dt">p =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.001</span>),</span>
+<span id="cb20-2"><a href="#cb20-2"></a>           <span class="dt">log_odds =</span> <span class="kw">log</span>(p<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>p))) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(log_odds, p))<span class="op">+</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> latex2exp<span class="op">::</span><span class="kw">TeX</span>(<span class="st">&quot;$log</span><span class="ch">\\</span><span class="st">left(</span><span class="ch">\\</span><span class="st">frac{p}{1-p}</span><span class="ch">\\</span><span class="st">right)$&quot;</span>))<span class="op">+</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<p><img src="2_stats_spectrum_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+<div id="section-6" class="section level3">
+<h3>1.4.2 Почему не линейную регрессию?</h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>lm_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">as.integer</span>(have_ejectives)<span class="op">~</span><span class="dv">1</span>, <span class="dt">data =</span> ejectives)</span>
+<span id="cb21-2"><a href="#cb21-2"></a>lm_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">as.integer</span>(have_ejectives)<span class="op">~</span>total, <span class="dt">data =</span> ejectives)</span>
+<span id="cb21-3"><a href="#cb21-3"></a>lm_<span class="dv">0</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = as.integer(have_ejectives) ~ 1, data = ejectives)
+## 
+## Coefficients:
+## (Intercept)  
+##      0.1129</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>lm_<span class="dv">1</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = as.integer(have_ejectives) ~ total, data = ejectives)
+## 
+## Coefficients:
+## (Intercept)        total  
+##   -0.085876     0.008077</code></pre>
+<p>Первая модель: <span class="math display">\[ejectives = 1.316 \times consonants\]</span> Вторая модель: <span class="math display">\[ejectives = 0.4611 + 0.0353 \times consonants\]</span></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>ejectives <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(total, <span class="kw">as.integer</span>(have_ejectives)))<span class="op">+</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)<span class="op">+</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="st">  </span><span class="kw">theme_bw</span>()<span class="op">+</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;ejectives (yes = 2, no = 1)&quot;</span>)</span></code></pre></div>
+<p><img src="2_stats_spectrum_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div id="section-7" class="section level3">
+<h3>1.4.3 Логит: модель без предиктора</h3>
+<p>Будьте осторожны, <code>glm</code> не работает с тибблом.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>logit_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="kw">glm</span>(have_ejectives<span class="op">~</span><span class="dv">1</span>, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">data =</span> ejectives)</span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="kw">summary</span>(logit_<span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = have_ejectives ~ 1, family = &quot;binomial&quot;, data = ejectives)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.4895  -0.4895  -0.4895  -0.4895   2.0886  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  -2.0613     0.1008  -20.45   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 693.17  on 982  degrees of freedom
+## Residual deviance: 693.17  on 982  degrees of freedom
+## AIC: 695.17
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>logit_<span class="dv">0</span><span class="op">$</span>coefficients</span></code></pre></div>
+<pre><code>## (Intercept) 
+##   -2.061259</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">table</span>(ejectives<span class="op">$</span>have_ejectives)</span></code></pre></div>
+<pre><code>## 
+## FALSE  TRUE 
+##   872   111</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">log</span>(<span class="dv">111</span><span class="op">/</span><span class="dv">872</span>) <span class="co"># β0</span></span></code></pre></div>
+<pre><code>## [1] -2.061259</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="dv">111</span><span class="op">/</span>(<span class="dv">111</span><span class="op">+</span><span class="dv">872</span>) <span class="co"># p</span></span></code></pre></div>
+<pre><code>## [1] 0.1129196</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">exp</span>(<span class="kw">log</span>(<span class="dv">111</span><span class="op">/</span><span class="dv">872</span>))<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(<span class="kw">log</span>(<span class="dv">111</span><span class="op">/</span><span class="dv">872</span>))) <span class="co"># p</span></span></code></pre></div>
+<pre><code>## [1] 0.1129196</code></pre>
+</div>
+<div id="c---" class="section level3">
+<h3>1.4.4 Логит: модель c одним числовым предиктором</h3>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>logit_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">glm</span>(have_ejectives<span class="op">~</span>total, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">data =</span> ejectives)</span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="kw">summary</span>(logit_<span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = have_ejectives ~ total, family = &quot;binomial&quot;, data = ejectives)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.1944  -0.4687  -0.3933  -0.3292   2.3776  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -3.74452    0.26122 -14.335  &lt; 2e-16 ***
+## total        0.06119    0.00803   7.621 2.52e-14 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 693.17  on 982  degrees of freedom
+## Residual deviance: 630.41  on 981  degrees of freedom
+## AIC: 634.41
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>logit_<span class="dv">1</span><span class="op">$</span>coefficients</span></code></pre></div>
+<pre><code>## (Intercept)       total 
+## -3.74451734  0.06119122</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>ejectives <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb42-2"><a href="#cb42-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">have_ejectives =</span> <span class="kw">as.integer</span>(have_ejectives)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb42-3"><a href="#cb42-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(total, have_ejectives)) <span class="op">+</span></span>
+<span id="cb42-4"><a href="#cb42-4"></a><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></span>
+<span id="cb42-5"><a href="#cb42-5"></a><span class="st">  </span><span class="kw">theme_bw</span>()<span class="op">+</span></span>
+<span id="cb42-6"><a href="#cb42-6"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;glm&quot;</span>, </span>
+<span id="cb42-7"><a href="#cb42-7"></a>              <span class="dt">method.args =</span> <span class="kw">list</span>(<span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>),</span>
+<span id="cb42-8"><a href="#cb42-8"></a>              <span class="dt">se =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<p><img src="2_stats_spectrum_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>Какова вероятность, что в языке с 29 согласными есть абруптивные?</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>logit_<span class="dv">1</span><span class="op">$</span>coefficients</span></code></pre></div>
+<pre><code>## (Intercept)       total 
+## -3.74451734  0.06119122</code></pre>
+<p><span class="math display">\[\log\left({\frac{p}{1-p}}\right)_i=\beta_0+\beta_1\times consinants_i + \epsilon_i\]</span> <span class="math display">\[\log\left({\frac{p}{1-p}}\right)=-12.1123347 + 0.4576095 \times 29 = 1.158341\]</span> <span class="math display">\[p = \frac{e^{1.158341}}{1+e^{1.158341}} = 0.7610311\]</span></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="co"># log(odds)</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="kw">predict</span>(logit_<span class="dv">1</span>, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">total =</span> <span class="dv">29</span>))</span></code></pre></div>
+<pre><code>##         1 
+## -1.969972</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="co"># p</span></span>
+<span id="cb47-2"><a href="#cb47-2"></a><span class="kw">predict</span>(logit_<span class="dv">1</span>, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">total =</span> <span class="dv">29</span>), <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
+<pre><code>##         1 
+## 0.1223919</code></pre>
+</div>
+<div id="c----1" class="section level3">
+<h3>1.4.5 Логит: модель c одним категориальным предиктором</h3>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>logit_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">glm</span>(have_ejectives<span class="op">~</span>area, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">data =</span> ejectives)</span>
+<span id="cb49-2"><a href="#cb49-2"></a><span class="kw">summary</span>(logit_<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = have_ejectives ~ area, family = &quot;binomial&quot;, data = ejectives)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -1.10816  -0.46538  -0.44865  -0.00013   2.21664  
+## 
+## Coefficients:
+##                     Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)         -2.16832    0.16904 -12.827  &lt; 2e-16 ***
+## areaAustralia      -16.39775 1581.97224  -0.010    0.992    
+## areaEurasia         -0.07711    0.30002  -0.257    0.797    
+## areaNorth America    2.00324    0.27560   7.269 3.63e-13 ***
+## areaPapua          -16.39775  555.24390  -0.030    0.976    
+## areaSouth America   -0.19880    0.31858  -0.624    0.533    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 693.17  on 982  degrees of freedom
+## Residual deviance: 589.74  on 977  degrees of freedom
+## AIC: 601.74
+## 
+## Number of Fisher Scoring iterations: 17</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>logit_<span class="dv">2</span><span class="op">$</span>coefficients</span></code></pre></div>
+<pre><code>##       (Intercept)     areaAustralia       areaEurasia areaNorth America 
+##       -2.16832083      -16.39774768       -0.07710585        2.00324108 
+##         areaPapua areaSouth America 
+##      -16.39774768       -0.19880278</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="kw">table</span>(ejectives<span class="op">$</span>have_ejectives, ejectives<span class="op">$</span>area)</span></code></pre></div>
+<pre><code>##        
+##         Africa Australia Eurasia North America Papua South America
+##   FALSE    341        17     170            46   138           160
+##   TRUE      39         0      18            39     0            15</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="kw">log</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">6</span>) <span class="co"># Eurasia</span></span></code></pre></div>
+<pre><code>## [1] -1.791759</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="kw">log</span>(<span class="dv">3</span><span class="op">/</span><span class="dv">1</span>) <span class="co"># North America</span></span></code></pre></div>
+<pre><code>## [1] 1.098612</code></pre>
+</div>
+<div id="section-8" class="section level3">
+<h3>1.4.6 Логит: множественная регрессия</h3>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>logit_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">glm</span>(have_ejectives<span class="op">~</span>total<span class="op">+</span>area, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">data =</span> ejectives)</span>
+<span id="cb59-2"><a href="#cb59-2"></a><span class="kw">summary</span>(logit_<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = have_ejectives ~ total + area, family = &quot;binomial&quot;, 
+##     data = ejectives)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2.21414  -0.42232  -0.33162  -0.00015   2.44830  
+## 
+## Coefficients:
+##                     Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)       -4.402e+00  3.662e-01 -12.021  &lt; 2e-16 ***
+## total              7.282e-02  9.629e-03   7.562 3.96e-14 ***
+## areaAustralia     -1.557e+01  1.570e+03  -0.010   0.9921    
+## areaEurasia       -4.458e-01  3.348e-01  -1.331   0.1830    
+## areaNorth America  2.444e+00  3.022e-01   8.088 6.05e-16 ***
+## areaPapua         -1.556e+01  5.383e+02  -0.029   0.9769    
+## areaSouth America  6.069e-01  3.483e-01   1.742   0.0814 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 693.17  on 982  degrees of freedom
+## Residual deviance: 525.76  on 976  degrees of freedom
+## AIC: 539.76
+## 
+## Number of Fisher Scoring iterations: 17</code></pre>
+</div>
+<div id="section-9" class="section level3">
+<h3>1.4.7 Логит: сравнение моделей</h3>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="kw">AIC</span>(logit_<span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 695.1651</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="kw">AIC</span>(logit_<span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 634.4102</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a><span class="kw">AIC</span>(logit_<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 601.7417</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="kw">AIC</span>(logit_<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 539.7573</code></pre>
+<p>Для того, чтобы интерпретировать коэффициенты нужно проделать трансформацю:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a>(<span class="kw">exp</span>(logit_<span class="dv">1</span><span class="op">$</span>coefficients)<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">100</span></span></code></pre></div>
+<pre><code>## (Intercept)       total 
+##  -97.635296    6.310218</code></pre>
+<p>Перед нами процентное изменние шансов при увеличении независимой переменной на 1.</p>
+<p>Было предложено много аналогов R<span class="math inline">\(^2\)</span>, например, McFadden’s R squared:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a>pscl<span class="op">::</span><span class="kw">pR2</span>(logit_<span class="dv">1</span>)</span></code></pre></div>
+<pre><code>##           llh       llhNull            G2      McFadden          r2ML 
+## -315.20508447 -346.58253511   62.75490127    0.09053385    0.06184508 
+##          r2CU 
+##    0.12223149</code></pre>
+</div>
+</div>
+<div id="section-10" class="section level2">
 <h2>1.5 Регрессия со случайными эффектами</h2>
 </div>
 </div>
-<div id="section-5" class="section level1">
+<div id="section-11" class="section level1">
 <h1>2. Спектр</h1>
 <audio controls>
 <source src="data/Yanny_Laurel_original_speed_75.mp3" type="audio/wav">
