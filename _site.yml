@@ -3,10 +3,10 @@ navbar:
   left:
   - icon: fa-home
     href: index.html
-  - text: математика
+  - text: математика и статистика
     href: 1_math.html
-  - text: софт и статистика
-    href: 2_soft_and_stats.html
+  - text: статистика и опять спектр
+    href: 2_stats_spectrum.html
   - text: гласные
     href: 3_vowels.html
   - text: сонорные

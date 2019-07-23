@@ -1,0 +1,24 @@
+---
+editor_options: 
+  chunk_output_type: console
+---
+
+# 1. Регрессионный анализ
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Для тех, кто хочет следить за кодом, вот загруженные библиотеки:
+
+```{r, message=FALSE}
+library(tidyverse)
+# это стиль для ggplot (можно игнорировать эту команду)
+theme_set(theme_bw()+
+            theme(text = element_text(size = 16))) 
+```
+
+# 2. Спектр
+
+[Yanny Laurel]()
+<audio controls> <source src="data/Yanny_Laurel_original_speed_75.mp3" type="audio/wav"></audio><br>
