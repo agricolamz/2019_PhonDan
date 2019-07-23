@@ -712,8 +712,8 @@ div.tocify {
 <blockquote>
 <p>🤔 Приведите коэффициент при переменной <code>have_ejectives</code> (с точностью до 4 знаков после запятой):</p>
 </blockquote>
-<form name="FormThree" onsubmit="return validateFormThree()" method="post">
-<input type="text" name="answerThree"> <input type="submit" value="check">
+<form name="FormFive" onsubmit="return validateFormFive()" method="post">
+<input type="text" name="answerFive"> <input type="submit" value="check">
 </form>
 <p><br></p>
 </div>
@@ -723,8 +723,11 @@ div.tocify {
 <p><span class="math display">\[y_j = \beta_0 + \beta_1 \times x_{1j} + \dots + \beta_k \times x_{kj} + e_j\]</span></p>
 <p>Кроме того на практике, исследователи сравнивают разные модели, выбирая модели с статистически значимыми предикторами или используя информационные критерии (самый распространенный — критерий Акаике, который реализован в функции <code>AIC</code>)</p>
 <blockquote>
-<p>🤔 В датасете про гомосексуалов попробуйте предсказать восприятие носителей как гомосексуалов на основании переменных длительность s, средняя частота основного тона и размер диапозона частоты основного тона</p>
+<p>🤔 В датасете про гомосексуалов попробуйте предсказать восприятие носителей как гомосексуалов на основании переменных длительность s, средняя частота основного тона и размер диапозона частоты основного тона. Првиедите <span class="math inline">\(R^2\)</span> получившейся модели:</p>
 </blockquote>
+summary(lm(perceived.as.homo.percent~s.duration.ms+average.f0.Hz+f0.range.Hz, data = homo))&lt;# 0.238 form name=“FormSix” onsubmit=“return validateFormSix()” method=“post”&gt; <input type="text" name="answerSix"> <input type="submit" value="check">
+</form>
+<p><br></p>
 </div>
 <div id="section-4" class="section level2">
 <h2>1.4 Логистическая регрессия</h2>
@@ -754,7 +757,7 @@ div.tocify {
 <span id="cb20-4"><a href="#cb20-4"></a><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></span>
 <span id="cb20-5"><a href="#cb20-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> latex2exp<span class="op">::</span><span class="kw">TeX</span>(<span class="st">&quot;$log</span><span class="ch">\\</span><span class="st">left(</span><span class="ch">\\</span><span class="st">frac{p}{1-p}</span><span class="ch">\\</span><span class="st">right)$&quot;</span>))<span class="op">+</span></span>
 <span id="cb20-6"><a href="#cb20-6"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span></code></pre></div>
-<p><img src="2_stats_spectrum_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="2_stats_spectrum_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 </div>
 <div id="section-6" class="section level3">
 <h3>1.4.2 Почему не линейную регрессию?</h3>
@@ -783,7 +786,7 @@ div.tocify {
 <span id="cb25-4"><a href="#cb25-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)<span class="op">+</span></span>
 <span id="cb25-5"><a href="#cb25-5"></a><span class="st">  </span><span class="kw">theme_bw</span>()<span class="op">+</span></span>
 <span id="cb25-6"><a href="#cb25-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;ejectives (yes = 2, no = 1)&quot;</span>)</span></code></pre></div>
-<p><img src="2_stats_spectrum_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="2_stats_spectrum_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 </div>
 <div id="section-7" class="section level3">
 <h3>1.4.3 Логит: модель без предиктора</h3>
@@ -862,7 +865,7 @@ div.tocify {
 <span id="cb42-6"><a href="#cb42-6"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;glm&quot;</span>, </span>
 <span id="cb42-7"><a href="#cb42-7"></a>              <span class="dt">method.args =</span> <span class="kw">list</span>(<span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>),</span>
 <span id="cb42-8"><a href="#cb42-8"></a>              <span class="dt">se =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<p><img src="2_stats_spectrum_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="2_stats_spectrum_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>Какова вероятность, что в языке с 29 согласными есть абруптивные?</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>logit_<span class="dv">1</span><span class="op">$</span>coefficients</span></code></pre></div>
 <pre><code>## (Intercept)       total 
@@ -976,6 +979,20 @@ div.tocify {
 ## -315.20508447 -346.58253511   62.75490127    0.09053385    0.06184508 
 ##          r2CU 
 ##    0.12223149</code></pre>
+<blockquote>
+<p>🤔 В датасете про гомосексуалов попробуйте предсказать ориентацию носителей на основании переменных длительность s, средняя частота основного тона и размер диапозона частоты основного тона. Приведите коэффициент при предикторе <code>average.f0.Hz</code> получившейся модели (с точностью до 3 знака после запятой).</p>
+</blockquote>
+<form name="FormSeven" onsubmit="return validateFormSeven()" method="post">
+<input type="text" name="answerSeven"> <input type="submit" value="check">
+</form>
+<p><br></p>
+<blockquote>
+<p>🤔 Посчитайте вероятность быть гомосексуалом с условием `s.duration.ms = 62, average.f0.Hz =120, f0.range.Hz = 60. Ответ приведите с точностью до 3 знаков после запятой.</p>
+</blockquote>
+<form name="FormEight" onsubmit="return validateFormEight()" method="post">
+<input type="text" name="answerEight"> <input type="submit" value="check">
+</form>
+<p><br></p>
 </div>
 </div>
 <div id="section-10" class="section level2">
@@ -1039,6 +1056,39 @@ function validateFormFour() {
 function validateFormFive() {
     var x = document.forms["FormFive"]["answerFive"].value;
     if (x != "10.0455") {
+        alert("У меня другой ответ...");
+        return false;
+    } else {
+        alert("Да, все правильно");
+        return false;
+    }
+}
+
+function validateFormSix() {
+    var x = document.forms["FormSix"]["answerSix"].value;
+    if (x != "") {
+   0.238     alert("У меня другой ответ...");
+        return false;
+    } else {
+        alert("Да, все правильно");
+        return false;
+    }
+}
+
+function validateFormSeven() {
+    var x = document.forms["FormSeven"]["answerSeven"].value;
+    if (x != "-0.025") {
+        alert("У меня другой ответ...");
+        return false;
+    } else {
+        alert("Да, все правильно");
+        return false;
+    }
+}
+
+function validateFormEight() {
+    var x = document.forms["FormEight"]["answerEight"].value;
+    if (x != "0.536") {
         alert("У меня другой ответ...");
         return false;
     } else {

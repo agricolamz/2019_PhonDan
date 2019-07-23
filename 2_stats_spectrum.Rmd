@@ -186,8 +186,8 @@ summary(fit)
 
 > 🤔 Приведите коэффициент при переменной `have_ejectives` (с точностью до 4 знаков после запятой):
 
-<form name="FormThree" onsubmit="return validateFormThree()" method="post">
-<input type="text" name="answerThree">
+<form name="FormFive" onsubmit="return validateFormFive()" method="post">
+<input type="text" name="answerFive">
 <input type="submit" value="check">
 </form><br>
 
@@ -200,7 +200,17 @@ $$y_j = \beta_0 + \beta_1 \times x_{1j} + \dots + \beta_k \times x_{kj} + e_j$$
 
 Кроме того на практике, исследователи сравнивают разные модели, выбирая модели с статистически значимыми предикторами или используя информационные критерии (самый распространенный --- критерий Акаике, который реализован в функции `AIC`)
   
-> 🤔 В датасете про гомосексуалов попробуйте предсказать восприятие носителей как гомосексуалов на основании переменных длительность s,  средняя частота основного тона и размер диапозона частоты основного тона
+> 🤔 В датасете про гомосексуалов попробуйте предсказать восприятие носителей как гомосексуалов на основании переменных длительность s,  средняя частота основного тона и размер диапозона частоты основного тона. Првиедите $R^2$ получившейся модели:
+
+```{r, include=FALSE}
+
+```
+
+summary(lm(perceived.as.homo.percent~s.duration.ms+average.f0.Hz+f0.range.Hz, data = homo))<# 0.238
+form name="FormSix" onsubmit="return validateFormSix()" method="post">
+<input type="text" name="answerSix">
+<input type="submit" value="check">
+</form><br>
 
 ## 1.4 Логистическая регрессия
 
@@ -341,6 +351,30 @@ AIC(logit_3)
 pscl::pR2(logit_1)
 ```
 
+> 🤔 В датасете про гомосексуалов попробуйте предсказать ориентацию носителей  на основании переменных длительность s,  средняя частота основного тона и размер диапозона частоты основного тона. Приведите коэффициент при предикторе `average.f0.Hz` получившейся модели (с точностью до 3 знака после запятой).
+
+```{r, include=FALSE}
+homo_fit <- glm(orientation~s.duration.ms+average.f0.Hz+ f0.range.Hz, family = "binomial", data = homo)
+summary(homo_fit)
+# -0.025
+```
+
+<form name="FormSeven" onsubmit="return validateFormSeven()" method="post">
+<input type="text" name="answerSeven">
+<input type="submit" value="check">
+</form><br>
+
+> 🤔 Посчитайте вероятность быть гомосексуалом с условием `s.duration.ms = 62, average.f0.Hz =120, f0.range.Hz = 60. Ответ приведите с точностью до 3 знаков после запятой.
+
+```{r, include=FALSE}
+predict(homo_fit, newdata = data.frame(s.duration.ms = 62,average.f0.Hz =120, f0.range.Hz = 60), type = "response")
+```
+
+
+<form name="FormEight" onsubmit="return validateFormEight()" method="post">
+<input type="text" name="answerEight">
+<input type="submit" value="check">
+</form><br>
 
 ## 1.5 Регрессия со случайными эффектами
 
@@ -404,6 +438,39 @@ function validateFormFour() {
 function validateFormFive() {
     var x = document.forms["FormFive"]["answerFive"].value;
     if (x != "10.0455") {
+        alert("У меня другой ответ...");
+        return false;
+    } else {
+        alert("Да, все правильно");
+        return false;
+    }
+}
+
+function validateFormSix() {
+    var x = document.forms["FormSix"]["answerSix"].value;
+    if (x != "") {
+   0.238     alert("У меня другой ответ...");
+        return false;
+    } else {
+        alert("Да, все правильно");
+        return false;
+    }
+}
+
+function validateFormSeven() {
+    var x = document.forms["FormSeven"]["answerSeven"].value;
+    if (x != "-0.025") {
+        alert("У меня другой ответ...");
+        return false;
+    } else {
+        alert("Да, все правильно");
+        return false;
+    }
+}
+
+function validateFormEight() {
+    var x = document.forms["FormEight"]["answerEight"].value;
+    if (x != "0.536") {
         alert("У меня другой ответ...");
         return false;
     } else {
