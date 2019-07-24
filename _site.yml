@@ -6,9 +6,9 @@ navbar:
   - text: математика и статистика
     href: 1_math.html
   - text: статистика и опять спектр
-    href: 2_stats_spectrum.html
+    href: 2_stats.html
   - text: гласные
-    href: 3_vowels.html
+    href: 3_spectrum_vowels.html
   - text: сонорные
     href: 4_sonorants.html
   - text: шумные
