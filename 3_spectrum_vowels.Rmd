@@ -41,3 +41,5 @@ output: html_document
 [Можно скачать звук](https://github.com/agricolamz/2019_PhonDan/raw/master/data/excellent_idea.wav)
 
 ## 2. Гласные
+
+[презентация](https://github.com/agricolamz/2019_PhonDan/raw/master/data/Vowels_lecture.pdf)
