@@ -17,11 +17,11 @@ output: html_document
 
 * Conventional spectrogram and Zhao-Atlas-Marks distribution of the English word had, computed using a Kaiser tapering function.
 
-![](images/3-3-fourier-spectrum.png)
+![](images/3-4-ZAM.png)
 
 * Conventional and reassigned spectrograms of the English word right
 
-![](images/3-4-ZAM.png)
+![](images/3-5-reassigned-spectrum.png)
 
 Подробности в книге Fulop 2011.
 
