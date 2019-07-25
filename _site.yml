@@ -9,10 +9,9 @@ navbar:
     href: 2_stats.html
   - text: гласные
     href: 3_spectrum_vowels.html
-  - text: сонорные
-    href: 4_sonorants.html
-  - text: шумные
-    href: 5_obstruents.html  
+  - text: сонорные и шумные
+    href: 4_sonorants_obstruents.html
+  - text: практика сбора данных
   - text: просодия
     href: 6_prosody.html
 output_dir: docs

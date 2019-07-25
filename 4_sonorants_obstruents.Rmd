@@ -1,0 +1,9 @@
+---
+output: html_document
+---
+
+
+# 2. Домашнее задание
+
+* Посмотрите видео про палатографию: [1ое](https://www.youtube.com/watch?v=wCDuh6dfw6g&index=1&list=PL1741BF0646F7DEEF), [2ое](https://www.youtube.com/watch?v=2XEJVs6XbYA&index=2&list=PL1741BF0646F7DEEF), [3ое](https://www.youtube.com/watch?v=kC1x63lgulM&list=PL1741BF0646F7DEEF&index=3), [4ое](https://www.youtube.com/watch?v=llP36cePiMM&list=PL1741BF0646F7DEEF&index=4), [5ое](https://www.youtube.com/watch?v=CqN-mh02o5U&list=PL1741BF0646F7DEEF&index=5),
+[6ое](https://www.youtube.com/watch?v=8Sh5hFnIuS4&index=6&list=PL1741BF0646F7DEEF)
