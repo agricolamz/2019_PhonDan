@@ -3,6 +3,8 @@ output: html_document
 ---
 # Сонорные
 
+[Praat scripts](https://sites.google.com/site/praatscripts/)
+
 ## 1. Сонорные
 
 [материалы](https://github.com/agricolamz/2019_PhonDan/raw/master/data/18.02.17_Sonorants.pdf)
