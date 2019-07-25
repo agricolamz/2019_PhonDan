@@ -1,0 +1,15 @@
+---
+output: html_document
+---
+# Сонорные
+
+## 1. Сонорные
+
+[материалы](https://github.com/agricolamz/2019_PhonDan/raw/master/data/18.02.17_Sonorants.pdf)
+
+[Андийские носовые](https://github.com/agricolamz/2019_PhonDan/raw/master/data/andi_nasals.wav)
+
+## 3. Домашнее задание
+
+* Посмотрите видео про палатографию: [1ое](https://www.youtube.com/watch?v=wCDuh6dfw6g&index=1&list=PL1741BF0646F7DEEF), [2ое](https://www.youtube.com/watch?v=2XEJVs6XbYA&index=2&list=PL1741BF0646F7DEEF), [3ое](https://www.youtube.com/watch?v=kC1x63lgulM&list=PL1741BF0646F7DEEF&index=3), [4ое](https://www.youtube.com/watch?v=llP36cePiMM&list=PL1741BF0646F7DEEF&index=4), [5ое](https://www.youtube.com/watch?v=CqN-mh02o5U&list=PL1741BF0646F7DEEF&index=5), [6ое](https://www.youtube.com/watch?v=8Sh5hFnIuS4&index=6&list=PL1741BF0646F7DEEF)
+* Напишите скрипт, который рисует [спектрограмму и осцилограмму звукового файла](https://github.com/agricolamz/2019_PhonDan/raw/master/data/example.png), при этом пользователь должен иметь возможность выбрать границу частот.
