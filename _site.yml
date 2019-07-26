@@ -12,6 +12,7 @@ navbar:
   - text: сонорные
     href: 4_sonorants.html
   - text: шумные и практика сбора данных
+    href: 5_fricatives_articulations_packages.html
   - text: просодия
     href: 6_prosody.html
 output_dir: docs
