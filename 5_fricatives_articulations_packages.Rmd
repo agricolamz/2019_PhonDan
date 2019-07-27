@@ -113,9 +113,13 @@ library(phonfieldwork)
 * `extract_intervals()`
 * `tier_to_df()` и `df_to_tier()`
 
+## 5. Костя Филатов -- Редукция гласных в рутульском
+
+[материалы](https://triolo.github.io/rutul_vowel_reduction/)
+
 ## 4. Домашнее задание
 ### 4.1 Более простое
-Вот [звук](https://github.com/agricolamz/2019_PhonDan/blob/master/data/andi_plosives.wav?raw=true) и [текстгрид](https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/andi_plosives.TextGrid). Извлеките при помощи скрипта Lennes M. длительность и визуализируйте при помощи [R скрипта](https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/plosives.R).
+Вот [звук](https://github.com/agricolamz/2019_PhonDan/blob/master/data/andi_plosives.wav?raw=true) и [текстгрид](https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/andi_plosives.TextGrid). Разметьте CD и VOT и извлеките их при помощи скрипта Lennes M. длительность и визуализируйте при помощи [R скрипта](https://raw.githubusercontent.com/agricolamz/2019_PhonDan/master/data/plosives.R).
 
 ### 4.2 Более сложное
 На флешке есть мои данные с абазинскими гласными и их разметкой. Воспользуйтесь [вот этим скриптом на гитхабе](https://github.com/agricolamz/get_pitch_formants_duration), чтобы извлечь форманты. Отфильтруйте полученные данные в R, чтобы остались только гласные a и ə. Постройте регрессию:
